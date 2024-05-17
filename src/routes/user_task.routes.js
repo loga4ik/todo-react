@@ -1,11 +1,11 @@
 const Router = require("express").Router();
 
 const { where } = require("sequelize");
-const { User_task } = require("../db/models");
+const { user_task } = require("../db/models");
 
 Router.get("/", async (req, res) => {
   try {
-    const data = await User_task.findAll({ raw: true });
+    const data = await user_task.findAll({ raw: true });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -16,7 +16,7 @@ Router.get("/:aim_id", async (req, res) => {
   const aim_id = req.params.aim_id;
 
   try {
-    const data = await User_task.findAll(
+    const data = await user_task.findAll(
       { where: { aim_id: aim_id } }
     );
     res.json(data);
@@ -31,8 +31,8 @@ Router.put("/update/:id", async (req, res) => {
   const text = req.body.text;
 
   try {
-    await User_task.update({ text: text }, { where: { id } });
-    const data = await User_task.findAll({ where: { id } });
+    await user_task.update({ text: text }, { where: { id } });
+    const data = await user_task.findAll({ where: { id } });
     res.json(...data);
   } catch (err) {
     res.status(500).json(err);
@@ -45,7 +45,7 @@ Router.post("/create", async (req, res) => {
   const text = req.body.text;
   console.log(aim_id);
   try {
-    const data = await User_task.create({ aim_id: aim_id, text: text });
+    const data = await user_task.create({ aim_id: aim_id, text: text });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -55,7 +55,7 @@ Router.post("/create", async (req, res) => {
 Router.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await User_task.destroy({
+    const data = await user_task.destroy({
       where: { id },
     });
     res.json(data);

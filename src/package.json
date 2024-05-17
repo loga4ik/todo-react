@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js --ext js,json",
-    "db-create": "npx sequelize db:create"
+    "db-create": "npx sequelize db:create",
+    "dbr": "sequelize db:drop && sequelize db:create && sequelize db:migrate"
   },
   "author": "loga4ik",
   "license": "ISC",

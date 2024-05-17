@@ -1,11 +1,11 @@
 const Router = require("express").Router();
 
 const { where } = require("sequelize");
-const { User_aim, User_task, User_subtask } = require("../db/models");
+const { user_aim, user_task, user_subtask } = require("../db/models");
 
 Router.get("/", async (req, res) => {
   try {
-    const data = await User_aim.findAll({ raw: true });
+    const data = await user_aim.findAll({ raw: true });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -16,7 +16,7 @@ Router.get("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
   console.log(user_id);
   try {
-    const data = await User_aim.findAll(
+    const data = await user_aim.findAll(
       // { raw: true },
       { where: { user_id: user_id } }
     );
@@ -32,8 +32,8 @@ Router.put("/update/:id", async (req, res) => {
   const text = req.body.text;
 
   try {
-    await User_aim.update({ text: text }, { where: { id } });
-    const data = await User_aim.findAll({ where: { id } });
+    await user_aim.update({ text: text }, { where: { id } });
+    const data = await user_aim.findAll({ where: { id } });
     res.json(...data);
   } catch (err) {
     res.status(500).json(err);
@@ -45,9 +45,9 @@ Router.post("/create", async (req, res) => {
   const user_id = req.body.user_id;
   const text = req.body.text;
   try {
-    const data = await User_aim.create({ user_id: user_id, text: text });
+    const data = await user_aim.create({ user_id: user_id, text: text });
     res.json(data);
-    // const new_data = await User_task.create({ user_id: user_id, text: text });
+    // const new_data = await user_task.create({ user_id: user_id, text: text });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -59,10 +59,10 @@ Router.post("/create-list", async (req, res) => {
   const taskList = req.body.tasks ? [...req.body.tasks] : null;
 
   try {
-    const aimRes = await User_aim.create({ user_id: user_id, text: aim_text });
+    const aimRes = await user_aim.create({ user_id: user_id, text: aim_text });
     finalRes = { ...aimRes.dataValues, taskArr: [] };
     for (const task of taskList) {
-      const taskRes = await User_task.create({
+      const taskRes = await user_task.create({
         aim_id: aimRes.id,
         text: task.text,
       });
@@ -70,7 +70,7 @@ Router.post("/create-list", async (req, res) => {
       console.log(subtaskList);
       const taskTempRes = { ...taskRes.dataValues, subtaskArr: [] };
       for (const subtask of subtaskList) {
-        const subtaskRes = await User_subtask.create({
+        const subtaskRes = await user_subtask.create({
           task_id: taskRes.dataValues.id,
           text: subtask.text,
         });
@@ -88,7 +88,7 @@ Router.post("/create-list", async (req, res) => {
 Router.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await User_aim.destroy({
+    const data = await user_aim.destroy({
       where: { id },
     });
     res.json(data);
