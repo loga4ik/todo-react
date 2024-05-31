@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "nodemon app.js --ext js,json",
     "db-create": "npx sequelize db:create",
-    "dbr": "sequelize db:drop && sequelize db:create && sequelize db:migrate"
+    "dbr": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "author": "loga4ik",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0",

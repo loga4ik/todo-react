@@ -55,11 +55,11 @@ Router.post("/create", async (req, res) => {
 
 Router.post("/create-list", async (req, res) => {
   //достаем данные из тела запроса,
-  const { user_id, aim_text } = req.body;
+  const { user_id, text } = req.body;
   const taskList = req.body.tasks ? [...req.body.tasks] : null;
 
   try {
-    const aimRes = await user_aim.create({ user_id: user_id, text: aim_text });
+    const aimRes = await user_aim.create({ user_id: user_id, text: text });
     finalRes = { ...aimRes.dataValues, taskArr: [] };
     for (const task of taskList) {
       const taskRes = await user_task.create({
@@ -74,7 +74,7 @@ Router.post("/create-list", async (req, res) => {
           task_id: taskRes.dataValues.id,
           text: subtask.text,
         });
-        console.log(taskTempRes);
+        // console.log(taskTempRes);
         taskTempRes.subtaskArr.push(subtaskRes.dataValues);
       }
       finalRes.taskArr.push(taskTempRes);

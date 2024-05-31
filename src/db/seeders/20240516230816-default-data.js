@@ -1,55 +1,46 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-     */
+    const usersData = [
+      { login: "user", password: "pass" },
+      { login: "Dan", password: "pass" },
+      // Добавьте других пользователей по аналогии
+    ];
+
     await queryInterface.bulkInsert(
       "users",
-      [
-        {
-          login: "user",
-          password: "pass",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          login: "Dan",
-          password: "pass",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
+      usersData.map((userData) => ({
+        login: userData.login,
+        password: userData.password,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })),
       {}
     );
+
     await queryInterface.bulkInsert(
       "user_todos",
       [
         {
-          user_id: 1,
+          user_id: 1, // Присвойте соответствующий ID первому пользователю
           text: "new todo",
           is_active: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          user_id: 2,
+          user_id: 2, // Присвойте соответствующий ID второму пользователю
           text: "new todo",
           is_active: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        // Добавьте другие элементы по аналогии
       ],
       {}
     );
+
     await queryInterface.bulkInsert(
       "user_aims",
       [

@@ -1,8 +1,12 @@
 # todo-react-express
 
+install postgres
+
+put your username and password from postgres in db/config/database.json
+
 open src directory cmd and put:
 npm i
-npx sequelize db:create db:migrate db:seed:all
+npm run dbr
 npm run dev
 
 open web-src directory cmd and put:

@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 
 const { where } = require("sequelize");
-const { user_task } = require("../db/models");
+const { user_task, user_subtask } = require("../db/models");
 
 Router.get("/", async (req, res) => {
   try {
@@ -16,10 +16,28 @@ Router.get("/:aim_id", async (req, res) => {
   const aim_id = req.params.aim_id;
 
   try {
-    const data = await user_task.findAll(
-      { where: { aim_id: aim_id } }
-    );
+    const data = await user_task.findAll({ where: { aim_id: aim_id } });
     res.json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+Router.get("/taskAndSubtasks/:aim_id", async (req, res) => {
+  const aim_id = req.params.aim_id;
+
+  try {
+    const tasks = await user_task.findAll({ where: { aim_id: aim_id } });
+
+    const tasksWithSubtasks = await Promise.all(
+      tasks.map(async (task) => {
+        const subtasks = await user_subtask.findAll({
+          where: { task_id: task.id },
+        });
+        return { ...task.toJSON(), subtasks };
+      })
+    );
+
+    res.json(tasksWithSubtasks);
   } catch (err) {
     res.status(500).json(err);
   }

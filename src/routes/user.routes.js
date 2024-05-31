@@ -2,6 +2,12 @@ const Router = require("express").Router();
 
 const { where } = require("sequelize");
 const { user } = require("../db/models");
+const bcrypt = require("bcryptjs");
+
+const comparePassword = async ({ possiblePassword, hashedPassword }) => {
+  // return { possiblePassword, hashedPassword };
+  return await bcrypt.compare(possiblePassword, hashedPassword);
+};
 
 Router.get("/", async (req, res) => {
   try {
@@ -23,16 +29,25 @@ Router.get("/:id", async (req, res) => {
   }
 });
 
-Router.put("/login/:id", async (req, res) => {
+Router.post("/login", async (req, res) => {
   //достаем данные из параметров запроса,
-  const login = req.body.login;
-  const password = req.body.password;
+  const { login, password } = req.body;
+  // console.log(login);
   // const { login, password } = req.body;
-  const id = req.params.id;
+  // const id = req.params.id;
   try {
-    await user.update({ login: login, password: password }, { where: { id } });
-    const data = await user.findAll({ where: { id } });
-    res.json(...data);
+    const currentUser = await user.findOne({ where: { login } });
+    // console.log(password);
+    const isMatch = await comparePassword({
+      possiblePassword: password,
+      hashedPassword: currentUser.password,
+    });
+    // console.log(isMatch);
+    if (!currentUser || !isMatch) {
+      return res.status(401).send("invalid password or login").json();
+    } else {
+      res.json(currentUser);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -44,8 +59,10 @@ Router.post("/create", async (req, res) => {
   const password = req.body.password;
   console.log(login, password);
   try {
-    const data = await user.create({ login: login, password: password });
-    res.json(data);
+    res.status(500).json(err);
+
+    // const data = await user.create({ login: login, password: password });
+    // res.json(data);
   } catch (err) {
     res.status(500).json(err);
   }
