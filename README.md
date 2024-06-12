@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # todo-react-express
 
 install postgres
@@ -12,3 +13,6 @@ npm run dev
 open web-src directory cmd and put:
 npm i
 npm run start
+=======
+# todo-react
+>>>>>>> origin/main

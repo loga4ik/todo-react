@@ -16,10 +16,7 @@ Router.get("/", async (req, res) => {
 Router.get("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
   try {
-    console.log(user_id);
-    const data = await user_todo.findAll(
-      { where: { user_id: user_id } }
-    );
+    const data = await user_todo.findAll({ where: { user_id: user_id } });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -43,20 +40,25 @@ Router.put("/update/:id", async (req, res) => {
   const id = req.params.id;
   const { text } = req.body;
   try {
-    const data = await user_todo.update({ text: text }, { where: { id } });
+    await user_todo.update({ text: text }, { where: { id } });
+    const data = await user_todo.findOne({ where: { id } });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+//переписать на измненение
 Router.get("/inactive/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await user_todo.update(
-      { is_active: false },
-      { where: { id } }
-    );
+    const todoItem = await user_todo.findOne({ where: { id } });
+    if (!todoItem) {
+      return res.status(404).json({ error: "Todo item not found" });
+    }
+    const newStatus = !todoItem.is_active;
+    await user_todo.update({ is_active: newStatus }, { where: { id } });
+    const data = await user_todo.findOne({ where: { id } });
     res.json(data);
   } catch (err) {
     res.status(500).json(err);

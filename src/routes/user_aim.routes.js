@@ -14,7 +14,6 @@ Router.get("/", async (req, res) => {
 
 Router.get("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
-  console.log(user_id);
   try {
     const data = await user_aim.findAll(
       // { raw: true },
@@ -67,7 +66,6 @@ Router.post("/create-list", async (req, res) => {
         text: task.text,
       });
       const subtaskList = task.subtasks ? task.subtasks : null;
-      console.log(subtaskList);
       const taskTempRes = { ...taskRes.dataValues, subtaskArr: [] };
       for (const subtask of subtaskList) {
         const subtaskRes = await user_subtask.create({

@@ -61,7 +61,6 @@ Router.post("/create", async (req, res) => {
   //достаем данные из тела запроса,
   const aim_id = req.body.aim_id;
   const text = req.body.text;
-  console.log(aim_id);
   try {
     const data = await user_task.create({ aim_id: aim_id, text: text });
     res.json(data);

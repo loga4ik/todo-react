@@ -7,6 +7,9 @@ const userTodoRouter = require("./routes/user_todo.routes");
 const userAimRouter = require("./routes/user_aim.routes");
 const userTaskRouter = require("./routes/user_task.routes");
 const userSubtaskRouter = require("./routes/user_subtask.routes");
+const session = require("express-session");
+const getUser = require("./middlewares/getUser");
+const sessionConfig = require("./config/sessionConfig");
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -18,6 +21,8 @@ app.use((req, res, next) => {
 });
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
+app.use(session(sessionConfig));
+app.use(getUser);
 app.use(express.json());
 
 app.use("/api/user", userRouter);

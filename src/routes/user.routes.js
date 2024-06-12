@@ -11,7 +11,8 @@ const comparePassword = async ({ possiblePassword, hashedPassword }) => {
 
 Router.get("/", async (req, res) => {
   try {
-    const data = await user.findAll({ raw: true });
+    // console.log(req.session.user_id);
+    const data = await user.findByPk(req.session.user_id);
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -32,37 +33,44 @@ Router.get("/:id", async (req, res) => {
 Router.post("/login", async (req, res) => {
   //достаем данные из параметров запроса,
   const { login, password } = req.body;
-  // console.log(login);
-  // const { login, password } = req.body;
-  // const id = req.params.id;
   try {
-    const currentUser = await user.findOne({ where: { login } });
-    // console.log(password);
-    const isMatch = await comparePassword({
-      possiblePassword: password,
-      hashedPassword: currentUser.password,
-    });
-    // console.log(isMatch);
-    if (!currentUser || !isMatch) {
+    try {
+      const currentUser = await user.findOne({ where: { login } });
+      const isMatch = await comparePassword({
+        possiblePassword: password,
+        hashedPassword: currentUser.password,
+      });
+      if (!currentUser || !isMatch) {
+        return res.status(401).send("invalid password or login").json();
+      } else {
+        req.session.user_id = currentUser.id;
+        res.json(currentUser);
+      }
+    } catch (error) {
       return res.status(401).send("invalid password or login").json();
-    } else {
-      res.json(currentUser);
     }
+
+    // console.log(password);
+    //принудительно вернуть ошибке с сервера
+
+    // res.status(500).json(err);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 Router.post("/create", async (req, res) => {
-  //достаем данные из тела запроса,
-  const login = req.body.login;
-  const password = req.body.password;
-  console.log(login, password);
+  const { login, password } = req.body;
   try {
-    res.status(500).json(err);
-
-    // const data = await user.create({ login: login, password: password });
-    // res.json(data);
+    const isBusy = await user.findOne({ where: { login: login } });
+    if (isBusy) {
+      res.status(401).send("this login is already taken").json();
+    } else {
+      const data = await user.create({ login: login, password: password });
+      res.json(data);
+    }
+    //принудительно вернуть ошибке с сервера
+    // res.status(500).json(err);
   } catch (err) {
     res.status(500).json(err);
   }
