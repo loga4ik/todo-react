@@ -1,0 +1,78 @@
+:root {
+  --main-bg-color: rgb(224, 224, 224);
+  --main-text-color: #575757;
+}
+
+.form-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: #e0e0e0; */
+}
+
+.form-block {
+  padding: 1.5rem 3rem;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: rgb(224, 224, 224);
+  box-shadow: inset 8px 8px 16px #d5d5d5, inset -8px -8px 16px #ebebeb;
+}
+
+.form-title {
+  font-size: larger;
+  color: var(--main-text-color);
+}
+
+.form-block_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-block_form * {
+  margin: 0.25rem;
+}
+
+.form_btn-redirect {
+  align-self: end;
+}
+
+.form_input {
+  font-size: medium;
+  border: none;
+  margin: 16px 12px 0px 12px;
+  padding: 6px 12px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+
+.form_input:focus:hover:valid {
+  border: none;
+  outline: none;
+  background-color: var(--main-bg-color);
+}
+
+.form_submit_btn,
+.form_btn-redirect,.todoPage-link {
+  cursor: pointer;
+  font-size: medium;
+  padding: 6px 12px;
+  color: var(--main-text-color);
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+.form_submit_btn {
+  margin-top: 16px;
+  align-self: flex-start;
+}
+.todoPage-link{
+  align-self: flex-end;
+}
+
+.form_submit_btn:hover {
+  background: #e0e0e0;
+  box-shadow: inset 6px 6px 12px #949494, inset -6px -6px 12px #ffffff;
+}

@@ -1,0 +1,100 @@
+:root {
+  --main-bg-color: rgb(224, 224, 224);
+  --main-text-color: #575757;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  color: var(--main-text-color);
+}
+.pageWrapper {
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+}
+.pageBlock {
+  margin-top: 2rem;
+  padding: 1.3rem;
+  border-radius: 10px;
+  background-color: rgb(224, 224, 224);
+  box-shadow: inset 8px 8px 16px #d5d5d5, inset -8px -8px 16px #ebebeb;
+}
+body {
+  margin: 0.7rem;
+}
+.todoPage-link {
+  height: 100%;
+  /* margin: .7rem; */
+}
+.todo-create-from {
+  display: flex;
+}
+.todo-create-button {
+  margin-left: 0.5rem;
+}
+.dropdown-toggle {
+  width: 16rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.aimForm-task {
+  margin-left: 1rem;
+  border: 1px solid black;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  width: auto;
+}
+.task {
+  margin-left: 1rem;
+}
+.show-subtask {
+  margin-left: 2rem;
+}
+.edit-element {
+  content: "";
+  display: inline-flex;
+  padding: 12px;
+  margin: 0.5rem;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+
+  border: none;
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+
+  background-image: url(/public/img/edit.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.edit-from .form_input {
+  margin: 0 8px;
+}
+.form_btn {
+  color: var(--main-text-color);
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+.listElement {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.5fr 8fr 1fr;
+  margin-top: 12px;
+}
+.listElement_checkbox {
+  /* width: 100%; */
+  padding: 2px;
+}
+.listElement > .edit-from {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  display: flex;
+  justify-content: space-between;
+}
