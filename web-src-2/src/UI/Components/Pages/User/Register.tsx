@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../../../../store";
-import { registerUser, setDefaultError } from "../../../../Slices/userSlice/userSlice";
+import {
+  registerUser,
+  setDefaultError,
+} from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
 
 export const Register = () => {
@@ -15,13 +18,13 @@ export const Register = () => {
   useEffect(() => {
     if (currentUser) {
       dispatch(setDefaultError());
-      navigate("/todo");
+      navigate("/");
     }
   }, [currentUser, navigate, dispatch]);
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/todo");
+      navigate("/");
     }
     //тут можно будет потом нарисовать какое-нибудь уведомление
   }, [currentUser, navigate]);
@@ -37,16 +40,9 @@ export const Register = () => {
     dispatch(registerUser(data));
   };
 
-  const redirectOnClick = () => {
-    navigate("/login");
-  };
-
   return (
     <>
       <div className="form-page">
-        <button className="form_btn-redirect" onClick={redirectOnClick}>
-          уже есть аккаунт
-        </button>
         <div className="form-block">
           <div className="form-title">регистриция</div>
           <form

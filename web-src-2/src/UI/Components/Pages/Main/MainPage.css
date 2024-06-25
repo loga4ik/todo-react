@@ -10,8 +10,8 @@
 }
 .pageWrapper {
   display: flex;
-  justify-content: space-between;
-  /* flex-direction: column; */
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 .pageBlock {
   margin-top: 2rem;
@@ -24,12 +24,14 @@ body {
   margin: 0.7rem;
 }
 .todoPage-link {
-  height: 100%;
+  width: fit-content;
+  align-self: self-start;
+  justify-self: end;
+  /* height: 100%; */
+  /* flex: 2 2; */
   /* margin: .7rem; */
 }
-.todo-create-from {
-  display: flex;
-}
+
 .todo-create-button {
   margin-left: 0.5rem;
 }
@@ -52,26 +54,11 @@ body {
 .show-subtask {
   margin-left: 2rem;
 }
-.edit-element {
-  content: "";
-  display: inline-flex;
-  padding: 12px;
-  margin: 0.5rem;
-  cursor: pointer;
-  height: 16px;
-  width: 16px;
-
-  border: none;
-  border-radius: 10px;
-  box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
-  background: linear-gradient(145deg, #f0f0f0, #cacaca);
-
-  background-image: url(/public/img/edit.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
 .edit-from .form_input {
   margin: 0 8px;
+  padding: 4px 8px;
+  color: var(--main-text-color);
+  /* padding: ; */
 }
 .form_btn {
   color: var(--main-text-color);
@@ -79,22 +66,4 @@ body {
   border-radius: 50px;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
-}
-.listElement {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 0.5fr 8fr 1fr;
-  margin-top: 12px;
-}
-.listElement_checkbox {
-  /* width: 100%; */
-  padding: 2px;
-}
-.listElement > .edit-from {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  display: flex;
-  justify-content: space-between;
 }

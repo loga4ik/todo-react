@@ -18,7 +18,7 @@ export type AimType = {
   id: number;
   user_id: number;
   text: string;
-  createAt: Date;
+  createdAt: Date;
   updateAt: Date;
   //is_empty
   // taskArr?: TaskType[];
@@ -28,7 +28,7 @@ export type TaskType = {
   id: number;
   aim_id: number;
   text: string;
-  createAt: Date;
+  createdAt: Date;
   updateAt: Date;
   // subtaskArr?: SubtaskType[]; //
 };
@@ -38,7 +38,7 @@ export type SubtaskType = {
   task_id: number;
   text: string;
   is_active: boolean;
-  createAt: Date;
+  createdAt: Date;
   updateAt: Date;
 };
 
@@ -47,6 +47,6 @@ export type TodoType = {
   user_id: number;
   is_active: boolean;
   text: string;
-  createAt: Date;
+  createdAt: Date;
   updateAt: Date;
 };

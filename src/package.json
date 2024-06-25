@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js --ext js,json",
+    "dev": "nodemon app.js --ext js,json --ignore sessions",
     "db-create": "npx sequelize db:create",
     "dbr": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },

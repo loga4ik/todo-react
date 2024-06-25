@@ -23,15 +23,6 @@ export const Login = () => {
   //   //тут можно будет потом нарисовать какое-нибудь уведомление
   // }, [error]);
 
-  useEffect(() => {
-    if (currentUser) {
-      dispatch(setDefaultError());
-      navigate("/");
-    } else {
-      dispatch(getCookie());
-    }
-  }, [currentUser, navigate, dispatch]);
-
   const redirectOnClick = () => {
     navigate("/register");
   };
@@ -44,16 +35,20 @@ export const Login = () => {
   });
 
   const formOnSubmitHandler = (data: UserData) => {
-    dispatch(loginUser(data));
+    // dispatch(loginUser(data));
+    (async () => {
+      const query = await dispatch(loginUser(data));
+      query.payload && navigate("/");
+    })();
   };
 
   return (
     <>
       {error}
       <div className="form-page">
-        <button className="form_btn-redirect" onClick={redirectOnClick}>
+        {/* <button className="form_btn-redirect" onClick={redirectOnClick}>
           создать новый аккаунт
-        </button>
+        </button> */}
         <div className="form-block">
           <div className="form-title">войти</div>
           <form

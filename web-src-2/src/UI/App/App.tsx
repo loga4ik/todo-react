@@ -4,6 +4,7 @@ import { Main } from "../Components/Pages/Main/Main";
 import { Register } from "../Components/Pages/User/Register";
 import { Login } from "../Components/Pages/User/Login";
 import { AimForm } from "../Components/Blocks/Aims/aimForm/AimForm";
+import { Layout } from "../Components/HOC/Layout";
 
 function App() {
   // const dispatch = useDispatch<AppDispatch>();
@@ -17,11 +18,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/todo" element={<TodoList />} /> */}
-        <Route path="/create-aim" element={<AimForm />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/todo" element={<TodoList />} /> */}
+          <Route path="/create-aim" element={<AimForm />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -56,6 +56,7 @@
 .form_submit_btn,
 .form_btn-redirect,.todoPage-link {
   cursor: pointer;
+  text-decoration: none;
   font-size: medium;
   padding: 6px 12px;
   color: var(--main-text-color);
@@ -67,9 +68,6 @@
 .form_submit_btn {
   margin-top: 16px;
   align-self: flex-start;
-}
-.todoPage-link{
-  align-self: flex-end;
 }
 
 .form_submit_btn:hover {

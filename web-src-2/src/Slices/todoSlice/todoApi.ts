@@ -58,7 +58,7 @@ export const getUserTodos = async ({ userId }: { userId: number }) => {
     return response.json();
   } catch (error) {
     console.log(error);
-    } finally {
+  } finally {
     // abortController.abort();
   }
 };

@@ -10,6 +10,16 @@ export const getUserCookie = async () => {
   } catch (error) {}
 };
 
+export const deleteCookie = async () => {
+  try {
+    const response = await fetch("/user/deleteCookie");
+    console.log('response');
+    return response.json();
+  } catch (error) {
+    console.log('error');
+  }
+};
+
 export const register = async ({ login, password }: UserData) => {
   const abortController = new AbortController();
   try {

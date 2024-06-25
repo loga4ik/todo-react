@@ -5,15 +5,23 @@ const { user } = require("../db/models");
 const bcrypt = require("bcryptjs");
 
 const comparePassword = async ({ possiblePassword, hashedPassword }) => {
-  // return { possiblePassword, hashedPassword };
   return await bcrypt.compare(possiblePassword, hashedPassword);
 };
 
 Router.get("/", async (req, res) => {
   try {
-    // console.log(req.session.user_id);
     const data = await user.findByPk(req.session.user_id);
     res.json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+Router.get("/deleteCookie", async (req, res) => {
+  try {
+    req.session.destroy(() => {
+      res.clearCookie("user_id").json("ok");
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -23,7 +31,6 @@ Router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const data = await user.findAll({ where: { id: id } });
-    // console.log(id);
     res.json(data);
   } catch (err) {
     res.status(500).json(err);
@@ -31,7 +38,6 @@ Router.get("/:id", async (req, res) => {
 });
 
 Router.post("/login", async (req, res) => {
-  //достаем данные из параметров запроса,
   const { login, password } = req.body;
   try {
     try {
@@ -49,11 +55,6 @@ Router.post("/login", async (req, res) => {
     } catch (error) {
       return res.status(401).send("invalid password or login").json();
     }
-
-    // console.log(password);
-    //принудительно вернуть ошибке с сервера
-
-    // res.status(500).json(err);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -67,6 +68,7 @@ Router.post("/create", async (req, res) => {
       res.status(401).send("this login is already taken").json();
     } else {
       const data = await user.create({ login: login, password: password });
+      req.session.user_id = data.id;
       res.json(data);
     }
     //принудительно вернуть ошибке с сервера

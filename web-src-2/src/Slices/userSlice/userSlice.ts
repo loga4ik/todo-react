@@ -4,7 +4,7 @@ type OneItem = {
   id: number;
   login: string;
   password: string;
-  createAt: Date;
+  createdAt: Date;
   updateAt: Date;
 };
 // type User = {
@@ -17,7 +17,7 @@ type State = {
   currentUser?: CurrentUser;
   error?: string;
 };
-type CurrentUser = {
+export type CurrentUser = {
   id: number;
   login: string;
 };
@@ -29,6 +29,10 @@ const initialState: State = {
 
 export const getCookie = createAsyncThunk("getUserCookie", () =>
   userApi.getUserCookie()
+);
+
+export const setAllUserDefault = createAsyncThunk("deleteCookie", () =>
+  userApi.deleteCookie()
 );
 
 export const loginUser = createAsyncThunk<
@@ -80,25 +84,24 @@ const userSlice = createSlice({
       if (!action.payload) {
       }
       state.currentUser = action.payload;
-
-      // console.log(action.payload);
-      // console.log("action.payload");
     });
     element.addCase(loginUser.fulfilled, (state, action) => {
       state.currentUser = action.payload;
-      // console.log(action.payload);
     });
     element.addCase(loginUser.rejected, (state, action) => {
       state.error = String(action.payload);
-      // console.log(action.payload);
     });
     element.addCase(registerUser.fulfilled, (state, action) => {
       state.currentUser = action.payload;
-      // console.log(action.payload);
     });
     element.addCase(registerUser.rejected, (state, action) => {
-      // console.log(action.payload);
       state.error = String(action.payload);
+    });
+    element.addCase(setAllUserDefault.fulfilled, (state, action) => {
+      console.log("asd");
+      state.currentUser = undefined;
+      state.error = undefined;
+      state.userList = [];
     });
   },
 });

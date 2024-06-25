@@ -6,14 +6,20 @@ type FormType = {
 };
 type Props = {
   propsFunc: (text: string) => void;
+  setIsOpen: (isOpen: boolean) => void;
+  isOpen: boolean;
+  text: string;
 };
 
-export const RenameInput: React.FC<Props> = ({ propsFunc }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+export const RenameInput: React.FC<Props> = ({
+  propsFunc,
+  setIsOpen,
+  isOpen,
+  text,
+}) => {
   const { register, handleSubmit, reset } = useForm<FormType>({
     defaultValues: {
-      text: "",
+      text: text,
     },
   });
 
@@ -24,24 +30,16 @@ export const RenameInput: React.FC<Props> = ({ propsFunc }) => {
     setIsOpen(!isOpen);
   };
   return (
-    <>
-      <button className="edit-element" onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <form className="edit-from" onSubmit={handleSubmit(formSubmitHandler)}>
-          <input
-            className="form_input"
-            type="text"
-            placeholder="new title"
-            {...register("text")}
-          />
-          <button
-            className="form_btn"
-            onSubmit={handleSubmit(formSubmitHandler)}
-          >
-            изменить
-          </button>
-        </form>
-      )}
-    </>
+    <form className="edit-from" onSubmit={handleSubmit(formSubmitHandler)}>
+      <input
+        className="form_input"
+        type="text"
+        placeholder="new title"
+        {...register("text")}
+      />
+      <button className="form_btn" onSubmit={handleSubmit(formSubmitHandler)}>
+        изменить
+      </button>
+    </form>
   );
 };

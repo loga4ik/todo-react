@@ -1,0 +1,46 @@
+:root {
+  --main-bg-color: rgb(224, 224, 224);
+  --main-text-color: #575757;
+}
+.listElement {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 480px;
+  margin-top: 0.3rem;
+}
+.listElement_createdAt {
+  color: var(--main-text-color);
+  position: absolute;
+  right: 50px;
+}
+.listElement_checkbox {
+  margin: 0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.todo-create-from > .form_input {
+  margin-top: .5rem;
+}
+.edit-element {
+  content: "";
+  padding: 12px;
+  margin: 0.5rem;
+  margin-left: auto;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+
+  background-image: url(/public/img/edit.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.todo-create-from {
+  display: flex;
+  align-items: flex-end;
+}

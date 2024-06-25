@@ -1,5 +1,10 @@
-
-import { AimType, InputTaskType, SubtaskType, TaskType, TodoType } from "../../Types/AimListTypes";
+import {
+  AimType,
+  InputTaskType,
+  SubtaskType,
+  TaskType,
+  TodoType,
+} from "../../Types/AimListTypes";
 import * as todoApi from "./todoApi";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -71,6 +76,7 @@ export const userTasks = createAsyncThunk(
   "getUserTasks",
   ({ aimId }: { aimId: number }) => todoApi.getUserTasks({ aimId })
 );
+
 export const userTasksAndSubtasks = createAsyncThunk(
   "getUserTasksAndSubtasks",
   ({ aimId }: { aimId: number }) => todoApi.getUserTasksAndSubtasks({ aimId })
@@ -111,8 +117,6 @@ const todoSlice = createSlice({
   extraReducers: (element) => {
     element.addCase(userTodos.fulfilled, (state, action) => {
       state.todoList = action.payload;
-      console.log(action.payload);
-      
     });
 
     element.addCase(createUserTodo.fulfilled, (state, action) => {
@@ -161,7 +165,6 @@ const todoSlice = createSlice({
       state.taskList?.push(...action.payload);
       if (!state.taskList) return;
       state.taskList = unique(state.taskList);
-      console.log(action.payload);
     });
 
     element.addCase(createUserAimList.fulfilled, (state, action) => {
