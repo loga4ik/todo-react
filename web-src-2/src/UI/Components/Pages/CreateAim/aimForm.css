@@ -1,0 +1,101 @@
+:root {
+  --main-bg-color: rgb(224, 224, 224);
+  --main-text-color: #575757;
+}
+.aimFormAdd {
+  border: none;
+  height: 16px;
+  width: 16px;
+  padding: 14px;
+  margin-left: 0.5rem;
+  margin: 1rem 0 0 0.5rem;
+
+  border-radius: 10rem;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+  background-image: url(/public/img/plus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.aimFormDelete {
+  border: none;
+  height: 16px;
+  width: 16px;
+  padding: 14px;
+  margin-left: 0.5rem;
+
+  border-radius: 10rem;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+  background-image: url(/public/img/cross.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.aimForm-task {
+  margin-top: 1rem;
+  padding: 0.5rem;
+
+  border-radius: 10px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+
+.subtask_input,
+.task_input,
+.aim_input {
+  margin-top: 0.5rem;
+  font-size: medium;
+  border: none;
+  margin: 8px 12px 8px 12px;
+  padding: 6px 12px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+/* .aim_input {
+  margin: 16px 12px 0px 12px;
+} */
+
+.form_subtask {
+  position: relative;
+  margin-left: 1rem;
+}
+
+.form_subtask::before {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 110%;
+  background-color: var(--main-text-color);
+  position: absolute;
+  border-radius: 10rem;
+}
+.form_btn {
+  margin: 0.5rem 0.5rem 0 0.5rem;
+
+  cursor: pointer;
+  text-decoration: none;
+  height: fit-content;
+  font-size: medium;
+  padding: 6px 12px;
+  color: var(--main-text-color);
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+/* .create_aim_page {
+  padding: 1rem;
+  margin-top: .5rem;
+  border-radius: 10px;
+  background-color: rgb(224, 224, 224);
+  box-shadow: inset 8px 8px 16px #d5d5d5, inset -8px -8px 16px #ebebeb;
+} */
+.form_head {
+  display: flex;
+  justify-content: space-between;
+}

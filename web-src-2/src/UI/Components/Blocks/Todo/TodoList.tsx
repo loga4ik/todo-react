@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../../store";
+import { AppDispatch, RootState } from "../../../../store";
 import {
   createUserTodo,
   userTodos,
-} from "../../../../../Slices/todoSlice/todoSlice";
+} from "../../../../Slices/todoSlice/todoSlice";
 import { TodoItem } from "./TodoItem";
-import { CurrentUser } from "../../../../../Slices/userSlice/userSlice";
+import { CurrentUser } from "../../../../Slices/userSlice/userSlice";
 import "./Todo.css";
 import { ComplitedTodo } from "./ComplitedTodo";
 import { NewTodo } from "./NewTodo";
@@ -39,8 +39,8 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
   };
 
   return (
-    <>
-      <div className="todoBlock pageBlock">
+    <div className="todoBlock">
+      <div className=" pageBlock">
         <p>новые задачи</p>
         <form className="todo-create-from" onSubmit={formSubmitHandler}>
           <input
@@ -50,15 +50,17 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
             placeholder="добавить новую"
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="aimFormAdd" onClick={formSubmitHandler}></div>
+          <div className="form_add" onClick={formSubmitHandler}></div>
         </form>
         {newTodo && <NewTodo todoList={newTodo} />}
       </div>
-      <div className="todoBlock pageBlock">
-      <p>выполненные задачи</p>
-      {comlitedTodo && <ComplitedTodo todoList={comlitedTodo} />}
-      </div>
-    </>
+      {comlitedTodo[0] && (
+        <div className="pageBlock">
+          <p>выполненные задачи</p>
+          <ComplitedTodo todoList={comlitedTodo} />
+        </div>
+      )}
+    </div>
   );
 };
 // {newTodo &&

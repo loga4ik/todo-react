@@ -11,17 +11,10 @@ import {
 import { UserData } from "../../../../Slices/userSlice/userApi";
 
 export const Login = () => {
-  const { currentUser, error } = useSelector((state: RootState) => state.user);
+  const { error } = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (error) {
-  //     console.log("error");
-  //   }
-  //   //тут можно будет потом нарисовать какое-нибудь уведомление
-  // }, [error]);
 
   const redirectOnClick = () => {
     navigate("/register");
@@ -35,10 +28,9 @@ export const Login = () => {
   });
 
   const formOnSubmitHandler = (data: UserData) => {
-    // dispatch(loginUser(data));
     (async () => {
       const query = await dispatch(loginUser(data));
-      query.payload && navigate("/");
+      query.meta.requestStatus === "fulfilled" && navigate("/");
     })();
   };
 
@@ -46,9 +38,6 @@ export const Login = () => {
     <>
       {error}
       <div className="form-page">
-        {/* <button className="form_btn-redirect" onClick={redirectOnClick}>
-          создать новый аккаунт
-        </button> */}
         <div className="form-block">
           <div className="form-title">войти</div>
           <form
@@ -62,8 +51,8 @@ export const Login = () => {
               {...register("login")}
             />
             <input
-              className="form_input"
-              type="text"
+              className="form_input password_input"
+              type="password"
               placeholder="password"
               {...register("password")}
             />
@@ -76,7 +65,6 @@ export const Login = () => {
           </form>
         </div>
       </div>
-      new login/password
     </>
   );
 };

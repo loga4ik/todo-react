@@ -13,10 +13,9 @@ export const getUserCookie = async () => {
 export const deleteCookie = async () => {
   try {
     const response = await fetch("/user/deleteCookie");
-    console.log('response');
     return response.json();
   } catch (error) {
-    console.log('error');
+    console.log("error");
   }
 };
 
@@ -63,11 +62,12 @@ export const login = async ({ login, password }: UserData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`${response.status}`);
+      const errorText = await response.text(); // читаем тело ответа как текст
+      throw errorText;
     }
     return response.json();
   } catch (error) {
-    throw new Error(`${error}`);
+    throw error;
   } finally {
     // abortController.abort();
   }

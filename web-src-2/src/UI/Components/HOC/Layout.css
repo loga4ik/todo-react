@@ -14,3 +14,9 @@ p {
   display: flex;
   justify-content: space-between;
 }
+.header_label {
+  font-size: medium;
+}
+.header_login {
+  font-size: larger;
+}

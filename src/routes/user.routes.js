@@ -16,6 +16,14 @@ Router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+Router.get("/getAllUsers", async (req, res) => {
+  try {
+    const data = await user.findAll();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 Router.get("/deleteCookie", async (req, res) => {
   try {
@@ -42,6 +50,7 @@ Router.post("/login", async (req, res) => {
   try {
     try {
       const currentUser = await user.findOne({ where: { login } });
+      console.log(currentUser);
       const isMatch = await comparePassword({
         possiblePassword: password,
         hashedPassword: currentUser.password,

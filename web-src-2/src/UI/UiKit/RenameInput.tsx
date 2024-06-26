@@ -37,7 +37,7 @@ export const RenameInput: React.FC<Props> = ({
         placeholder="new title"
         {...register("text")}
       />
-      <button className="form_btn" onSubmit={handleSubmit(formSubmitHandler)}>
+      <button className="edit_form_btn" onSubmit={handleSubmit(formSubmitHandler)}>
         изменить
       </button>
     </form>

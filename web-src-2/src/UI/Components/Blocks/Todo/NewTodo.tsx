@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { TodoType } from "../../../../../Types/AimListTypes";
+import { TodoType } from "../../../../Types/AimListTypes";
 import { TodoItem } from "./TodoItem";
 type TodoList = {
   todoList: TodoType[];

@@ -15,13 +15,16 @@
   position: absolute;
   right: 50px;
 }
+
 .listElement_checkbox {
   margin: 0.5rem;
   height: 1.5rem;
   width: 1.5rem;
+  accent-color: var(--main-bg-color);
 }
+
 .todo-create-from > .form_input {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 .edit-element {
   content: "";
@@ -43,4 +46,28 @@
 .todo-create-from {
   display: flex;
   align-items: flex-end;
+}
+.form_add {
+  border: none;
+  padding: 14px;
+  cursor: pointer;
+  border-radius: 10rem;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+  background-image: url(/public/img/plus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.edit_form_btn{
+  cursor: pointer;
+  text-decoration: none;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: medium;
+  padding: 6px 12px;
+  color: var(--main-text-color);
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
 }

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Main } from "../Components/Pages/Main/Main";
 import { Register } from "../Components/Pages/User/Register";
 import { Login } from "../Components/Pages/User/Login";
-import { AimForm } from "../Components/Blocks/Aims/aimForm/AimForm";
+import { AimForm } from "../Components/Pages/CreateAim/AimForm";
 import { Layout } from "../Components/HOC/Layout";
 
 function App() {

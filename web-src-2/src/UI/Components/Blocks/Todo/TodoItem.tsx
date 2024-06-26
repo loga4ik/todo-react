@@ -1,14 +1,14 @@
 import React, { memo, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../../../store";
+import { AppDispatch } from "../../../../store";
 import "./Todo.css";
 import {
   switchActiveTodo,
   updateUserTodo,
-} from "../../../../../Slices/todoSlice/todoSlice";
-import { RenameInput } from "../../../../UiKit/RenameInput";
-import useShowTime from "../../../../../Hooks/useShowTime";
-import { formatTime } from "../../../../../scripts/formatTime";
+} from "../../../../Slices/todoSlice/todoSlice";
+import { RenameInput } from "../../../UIKit/RenameInput";
+import useShowTime from "../../../../Hooks/useShowTime";
+import { formatTime } from "../../../../scripts/formatTime";
 type TodoType = {
   id: number;
   text: string;

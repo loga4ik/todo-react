@@ -1,5 +1,5 @@
 import "./MainPage.css";
-import { TodoList } from "../../Blocks/Todo/TodoList/TodoList";
+import { TodoList } from "../../Blocks/Todo/TodoList";
 import { AimList } from "../../Blocks/Aims/AimList/AimList";
 import { AppDispatch, RootState } from "../../../../store";
 import { useDispatch, useSelector } from "react-redux";

@@ -56,8 +56,8 @@ export const Register = () => {
               {...register("login")}
             />
             <input
-              className="form_input"
-              type="text"
+              className="form_input password_input"
+              type="password"
               placeholder="password"
               {...register("password")}
             />

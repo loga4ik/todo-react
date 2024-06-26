@@ -98,7 +98,6 @@ const userSlice = createSlice({
       state.error = String(action.payload);
     });
     element.addCase(setAllUserDefault.fulfilled, (state, action) => {
-      console.log("asd");
       state.currentUser = undefined;
       state.error = undefined;
       state.userList = [];

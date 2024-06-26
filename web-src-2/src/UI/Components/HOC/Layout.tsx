@@ -16,16 +16,17 @@ export const Layout = () => {
     dispatch(setAllUserDefault());
     navigate("/login");
   };
-  console.log(currentUser);
-
   const location = useLocation();
   return (
     <div>
       <header className="header">
-        <p>{currentUser?.login}</p>
+        <p className="header_login">
+          {currentUser?.login && <span className="header_label">логин: </span>}
+          {currentUser?.login}
+        </p>
         {currentUser?.login && (
           <button className="form_btn-redirect" onClick={LogOut}>
-            LogOut
+            Выйти
           </button>
         )}
         {location.pathname === "/register" && (
