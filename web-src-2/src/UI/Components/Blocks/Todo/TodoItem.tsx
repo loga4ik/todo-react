@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import "./Todo.css";
 import {
+  deleteUserTodo,
   switchActiveTodo,
   updateUserTodo,
 } from "../../../../Slices/todoSlice/todoSlice";
@@ -37,6 +38,11 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
     },
     [dispatch, todo]
   );
+
+  const deleteTodo = useCallback(() => {
+    dispatch(deleteUserTodo({ todoId: todo.id }));
+  }, [dispatch, todo.id]);
+
   return (
     <div className="listElement">
       <input
@@ -57,6 +63,7 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
           text={todo.text}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
+          deleteTodo={deleteTodo}
         />
       )}
       {isHovered && (
@@ -64,7 +71,14 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
           {formatTime(todo.createdAt)}
         </span>
       )}
-      <button className="edit-element" onClick={() => setIsOpen(!isOpen)} />
+      {todo.is_active && (
+        <button
+          className={
+            !isOpen ? "edit-element open_element" : "edit-element close_element"
+          }
+          onClick={() => setIsOpen(!isOpen)}
+        />
+      )}
     </div>
   );
 });

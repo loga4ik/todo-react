@@ -67,6 +67,11 @@ export const switchActiveTodo = createAsyncThunk(
   ({ todoId }: { todoId: number }) => todoApi.switchTodoActive({ todoId })
 );
 
+export const deleteUserTodo = createAsyncThunk(
+  "deleteTodo",
+  ({ todoId }: { todoId: number }) => todoApi.deleteTodo({ todoId })
+);
+
 export const userAims = createAsyncThunk(
   "getUserAims",
   ({ userId }: { userId: number }) => todoApi.getUserAims({ userId })
@@ -128,6 +133,11 @@ const todoSlice = createSlice({
       state.todoList = state.todoList.map((todo) =>
         todo.id === action.payload.id ? action.payload : todo
       );
+    });
+    element.addCase(deleteUserTodo.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.todoList = state.todoList.filter((todo) => todo.id != action.payload.id);
+      }
     });
 
     element.addCase(updateUserTodo.fulfilled, (state, action) => {

@@ -7,6 +7,7 @@ type FormType = {
 type Props = {
   propsFunc: (text: string) => void;
   setIsOpen: (isOpen: boolean) => void;
+  deleteTodo: () => void;
   isOpen: boolean;
   text: string;
 };
@@ -14,6 +15,7 @@ type Props = {
 export const RenameInput: React.FC<Props> = ({
   propsFunc,
   setIsOpen,
+  deleteTodo,
   isOpen,
   text,
 }) => {
@@ -22,7 +24,10 @@ export const RenameInput: React.FC<Props> = ({
       text: text,
     },
   });
-
+  const deleteItemHandler = () => {
+    deleteTodo();
+  };
+  
   const formSubmitHandler = (data: FormType) => {
     propsFunc(data.text);
     //reset - сброс значений инпута
@@ -37,8 +42,17 @@ export const RenameInput: React.FC<Props> = ({
         placeholder="new title"
         {...register("text")}
       />
-      <button className="edit_form_btn" onSubmit={handleSubmit(formSubmitHandler)}>
-        изменить
+      <button
+        className="edit_form_btn"
+        onSubmit={handleSubmit(formSubmitHandler)}
+      >
+        сохранить
+      </button>
+      <button
+        className="edit_form_btn"
+        onClick={handleSubmit(deleteItemHandler)}
+      >
+        удалить
       </button>
     </form>
   );

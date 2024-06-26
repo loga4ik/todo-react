@@ -5,7 +5,7 @@
 .listElement {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   min-width: 480px;
   margin-top: 0.3rem;
@@ -39,9 +39,14 @@
   box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
 
-  background-image: url(/public/img/edit.svg);
   background-position: center;
   background-repeat: no-repeat;
+}
+.open_element {
+  background-image: url(/public/img/edit.svg);
+}
+.close_element {
+  background-image: url(/public/img/edit_crossed.svg);
 }
 .todo-create-from {
   display: flex;
@@ -58,13 +63,13 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.edit_form_btn{
+.edit_form_btn {
   cursor: pointer;
   text-decoration: none;
   height: -moz-fit-content;
   height: fit-content;
-  font-size: medium;
-  padding: 6px 12px;
+  font-size: small;
+  padding: 4px 8px;
   color: var(--main-text-color);
   border: none;
   border-radius: 50px;

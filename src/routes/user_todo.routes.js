@@ -67,11 +67,12 @@ Router.get("/inactive/:id", async (req, res) => {
 
 Router.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
+  console.log(id);
   try {
     const data = await user_todo.destroy({
       where: { id },
     });
-    res.json(data);
+    res.json({ id, data });
   } catch (err) {
     res.status(500).json(err);
   }

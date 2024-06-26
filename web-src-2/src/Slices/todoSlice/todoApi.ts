@@ -72,6 +72,18 @@ export const switchTodoActive = async ({ todoId }: { todoId: number }) => {
   }
 };
 
+export const deleteTodo = async ({ todoId }: { todoId: number }) => {
+  try {
+    const response = await fetch(`user_todo/delete/${todoId}`, {
+      method: "delete",
+    });
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createAimList = async ({
   user_id,
   text,
