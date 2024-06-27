@@ -25,7 +25,7 @@ Router.get("/getAllUsers", async (req, res) => {
   }
 });
 
-Router.get("/deleteCookie", async (req, res) => {
+Router.delete("/logOut", async (req, res) => {
   try {
     req.session.destroy(() => {
       res.clearCookie("user_id").json("ok");

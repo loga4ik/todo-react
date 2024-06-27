@@ -1,25 +1,33 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../../../store";
 import "./Layout.css";
 import { setAllTodoDefault } from "../../../Slices/todoSlice/todoSlice";
 import { setAllUserDefault } from "../../../Slices/userSlice/userSlice";
+import { ThemeContext } from "../../../Context/ThemeContext";
+import { useThemeContext } from "../../../Hooks/useThemeContext";
 
 export const Layout = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { isLight, changeTheme } = useThemeContext();
 
   const LogOut = () => {
     dispatch(setAllTodoDefault());
     dispatch(setAllUserDefault());
     navigate("/login");
   };
-  const location = useLocation();
+
   return (
-    <div>
+    <div className="full-screen-wrapper p-3">
       <header className="header">
+        <button onClick={() => changeTheme()}>
+          сменить тему оформления {`${isLight}`}
+        </button>
         <p className="header_login">
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}

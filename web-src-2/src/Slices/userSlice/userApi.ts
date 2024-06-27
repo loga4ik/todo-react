@@ -10,9 +10,11 @@ export const getUserCookie = async () => {
   } catch (error) {}
 };
 
-export const deleteCookie = async () => {
+export const logOut = async () => {
   try {
-    const response = await fetch("/user/deleteCookie");
+    const response = await fetch("/user/logOut",{
+      method:"delete"
+    });
     return response.json();
   } catch (error) {
     console.log("error");

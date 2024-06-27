@@ -31,8 +31,8 @@ export const getCookie = createAsyncThunk("getUserCookie", () =>
   userApi.getUserCookie()
 );
 
-export const setAllUserDefault = createAsyncThunk("deleteCookie", () =>
-  userApi.deleteCookie()
+export const setAllUserDefault = createAsyncThunk("logOut", () =>
+  userApi.logOut()
 );
 
 export const loginUser = createAsyncThunk<

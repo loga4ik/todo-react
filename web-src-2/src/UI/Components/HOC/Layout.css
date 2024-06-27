@@ -1,9 +1,26 @@
 :root {
   --main-bg-color: rgb(224, 224, 224);
   --main-text-color: #575757;
+  --main-bg-color-dark: #3b3b3b;
+  --main-text-color-dark: #c4c4c4;
 }
-html {
-  background-color: var(--main-bg-color);
+body {
+  margin: 0;
+  height: 100%;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+.full-screen-wrapper {
+  min-height: 100vh;
+  background: var(--main-bg-color); /* Установите здесь ваш цвет фона */
+}
+.bg_dark {
+  background-color: var(--main-bg-color-dark);
+}
+.text_dark{
+  color: var(--main-text-color-dark);
 }
 p {
   padding: 0;

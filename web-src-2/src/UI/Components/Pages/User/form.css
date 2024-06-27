@@ -8,7 +8,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* background-color: #e0e0e0; */
 }
 
 .form-block {
@@ -54,7 +53,8 @@
 }
 
 .form_submit_btn,
-.form_btn-redirect,.todoPage-link {
+.form_btn-redirect,
+.todoPage-link {
   cursor: pointer;
   text-decoration: none;
   font-size: medium;
