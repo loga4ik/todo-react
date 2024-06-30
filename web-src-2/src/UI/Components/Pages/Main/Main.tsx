@@ -23,10 +23,8 @@ export const Main = () => {
 
   return (
     <div className="pageWrapper">
-      {currentUser && <TodoList currentUser={currentUser}/>}
-      <div className="pageBlock">
-        <AimList />
-      </div>
+      {currentUser && <TodoList currentUser={currentUser} />}
+      <AimList />
     </div>
   );
 };

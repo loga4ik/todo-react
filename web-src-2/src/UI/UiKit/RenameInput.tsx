@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useThemeContext } from "../../Hooks/useThemeContext";
 
 type FormType = {
   text: string;
@@ -24,6 +25,7 @@ export const RenameInput: React.FC<Props> = ({
       text: text,
     },
   });
+  const { isDark } = useThemeContext();
   const deleteItemHandler = () => {
     deleteTodo();
   };
@@ -37,19 +39,25 @@ export const RenameInput: React.FC<Props> = ({
   return (
     <form className="edit-from" onSubmit={handleSubmit(formSubmitHandler)}>
       <input
-        className="form_input"
+        className={`form_input ${
+          isDark ? "dark_out_smaill text_dark " : "light_out_small"
+        }`}
         type="text"
         placeholder="new title"
         {...register("text")}
       />
       <button
-        className="edit_form_btn"
+        className={`edit_form_btn ${
+          isDark ? "dark_out_smaill text_dark" : "light_out_small"
+        }`}
         onSubmit={handleSubmit(formSubmitHandler)}
       >
         сохранить
       </button>
       <button
-        className="edit_form_btn"
+        className={`edit_form_btn ${
+          isDark ? "dark_out_smaill text_dark" : "light_out_small"
+        }`}
         onClick={handleSubmit(deleteItemHandler)}
       >
         удалить

@@ -5,12 +5,14 @@ import { AppDispatch, RootState } from "../../../../../store";
 import { userAims } from "../../../../../Slices/todoSlice/todoSlice";
 import { Aim } from "./Aim";
 import { useNavigate } from "react-router-dom";
+import { useThemeContext } from "../../../../../Hooks/useThemeContext";
 
 export const AimList = memo(() => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const aimList = useSelector((state: RootState) => state.todo.aimList);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const { isDark } = useThemeContext();
 
   useEffect(() => {
     if (currentUser?.id) {
@@ -26,9 +28,9 @@ export const AimList = memo(() => {
   };
 
   return (
-    <div className="aimList">
-      <p>цели</p>
-      <button className="todoPage-link" onClick={redirectCreateAimClickHandler}>
+    <div className={`pageBlock aimList ${isDark && "dark_in_big"}`}>
+      <p className={`${isDark && "text_dark"}`}>цели</p>
+      <button className={`todoPage-link ${isDark && "dark_out_smaill text_dark"}`} onClick={redirectCreateAimClickHandler}>
         создать
       </button>
       <div className="dropdown">

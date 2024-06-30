@@ -10,6 +10,7 @@ import { CurrentUser } from "../../../../Slices/userSlice/userSlice";
 import "./Todo.css";
 import { ComplitedTodo } from "./ComplitedTodo";
 import { NewTodo } from "./NewTodo";
+import { useThemeContext } from "../../../../Hooks/useThemeContext";
 type Props = {
   currentUser: CurrentUser;
 };
@@ -18,6 +19,7 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
   const todoList = useSelector((state: RootState) => state.todo.todoList);
   const dispatch = useDispatch<AppDispatch>();
   const [text, setText] = useState<string>("");
+  const { isDark } = useThemeContext();
 
   const comlitedTodo = todoList.filter((todo) => !todo.is_active);
   const newTodo = todoList.filter((todo) => todo.is_active);
@@ -40,23 +42,28 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
 
   return (
     <div className="todoBlock">
-      <div className=" pageBlock">
-        <p>новые задачи</p>
+      <div className={`pageBlock ${isDark && "dark_in_big"}`}>
+        <p className={`${isDark && "text_dark"}`}>новые задачи</p>
         <form className="todo-create-from" onSubmit={formSubmitHandler}>
           <input
-            className="form_input"
+            className={`form_input ${isDark && "dark_out_smaill text_dark"}`}
             type="text"
             value={text}
             placeholder="добавить новую"
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="form_add" onClick={formSubmitHandler}></div>
+          <div
+            className={`form_add ${
+              isDark ? "dark_out_smaill" : "light_out_small"
+            }`}
+            onClick={formSubmitHandler}
+          ></div>
         </form>
         {newTodo && <NewTodo todoList={newTodo} />}
       </div>
       {comlitedTodo[0] && (
-        <div className="pageBlock">
-          <p>выполненные задачи</p>
+        <div className={`pageBlock ${isDark && "dark_in_big"}`}>
+          <p className={`${isDark && "text_dark"}`}>выполненные задачи</p>
           <ComplitedTodo todoList={comlitedTodo} />
         </div>
       )}

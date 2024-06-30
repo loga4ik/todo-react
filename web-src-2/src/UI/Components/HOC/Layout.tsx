@@ -14,7 +14,7 @@ export const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLight, changeTheme } = useThemeContext();
+  const { isDark, changeTheme } = useThemeContext();
 
   const LogOut = () => {
     dispatch(setAllTodoDefault());
@@ -23,22 +23,25 @@ export const Layout = () => {
   };
 
   return (
-    <div className="full-screen-wrapper p-3">
+    <div className={`full-screen-wrapper p-3 ${isDark && "bg_dark"}`}>
       <header className="header">
         <button onClick={() => changeTheme()}>
-          сменить тему оформления {`${isLight}`}
+          сменить тему оформления {`${isDark}`}
         </button>
-        <p className="header_login">
+        <p className={`header_login ${isDark && "text_dark"}`}>
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}
         </p>
         {currentUser?.login && (
-          <button className="form_btn-redirect" onClick={LogOut}>
+          <button className={`form_btn-redirect ${isDark && "dark_out_smaill  text_dark"}`} onClick={LogOut}>
             Выйти
           </button>
         )}
         {location.pathname === "/register" && (
-          <NavLink className="form_btn-redirect" to={"login"}>
+          <NavLink
+            className={`form_btn-redirect ${isDark && "dark_out_smaill  text_dark"}`}
+            to={"login"}
+          >
             уже есть аккаунт
           </NavLink>
         )}

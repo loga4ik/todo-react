@@ -10,6 +10,7 @@ import {
 import { RenameInput } from "../../../UIKit/RenameInput";
 import useShowTime from "../../../../Hooks/useShowTime";
 import { formatTime } from "../../../../scripts/formatTime";
+import { useThemeContext } from "../../../../Hooks/useThemeContext";
 type TodoType = {
   id: number;
   text: string;
@@ -25,6 +26,7 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const { startHover, endHover, isHovered } = useShowTime(() => {});
+  const { isDark } = useThemeContext();
 
   const changeActiveCheckboxHadler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -52,9 +54,13 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         checked={!todo.is_active}
         onChange={changeActiveCheckboxHadler}
       />
-      <p>{todo.id}. </p>
+      <p className={`${isDark && "text_dark"}`}>{todo.id}. </p>
       {!isOpen ? (
-        <p onMouseEnter={startHover} onMouseLeave={endHover}>
+        <p
+          className={`${isDark && "text_dark"}`}
+          onMouseEnter={startHover}
+          onMouseLeave={endHover}
+        >
           {todo.text}
         </p>
       ) : (
@@ -67,15 +73,23 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         />
       )}
       {isHovered && (
-        <span className="listElement_createdAt">
+        <p className={`listElement_createdAt ${isDark && "text_dark"}`}>
           {formatTime(todo.createdAt)}
-        </span>
+        </p>
       )}
       {todo.is_active && (
         <button
-          className={
-            !isOpen ? "edit-element open_element" : "edit-element close_element"
-          }
+          className={`edit-element ${
+            isDark ? "dark_out_smaill" : "light_out_small"
+          } ${
+            !isOpen
+              ? isDark
+                ? "open_element_dark"
+                : "open_element"
+              : isDark
+              ? "close_element_dark"
+              : "close_element"
+          } `}
           onClick={() => setIsOpen(!isOpen)}
         />
       )}

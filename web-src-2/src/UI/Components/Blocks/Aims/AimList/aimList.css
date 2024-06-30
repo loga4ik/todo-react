@@ -51,36 +51,28 @@
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
-/* .dropdown-toggle {
-  
-} */
 
-.fi-rr-angle-left {
-  background-image: url(/public/img/angle-left.svg);
+.fi-rr-angle {
+  background-image: url(/public/img/angle.svg);
   height: 1rem;
   width: 1rem;
   margin-left: 0.5rem;
-  /* background-color: aqua; */
-  color: #333333;
 }
 textarea {
   min-width: 5rem;
   height: 100%;
-  /* display: inline-flex; */
+}
+.fi-rr-angle-dark{
+  background-image: url(/public/img/angle-dark.svg);
+}
+.fi-rr-angle.open {
+  rotate: 90deg;
 }
 
-.fi-rr-angle-left.open {
-  rotate: -90deg;
-}
-
-.fi-rr-angle-left.close {
-  rotate: 180deg;
-}
 .dropdown-menu.open {
   max-height: 20rem;
   overflow-y: scroll;
   scroll-behavior: auto;
-  /* overscroll-behavior-y: ; */
 }
 .aimList {
   display: grid;
@@ -99,4 +91,7 @@ textarea {
   border-radius: 50%;
   margin-right: 5px;
   margin-left: 2rem;
+}
+.subtask-element-dark::before{
+  background-color: #9b9b9b;
 }
