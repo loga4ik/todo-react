@@ -12,6 +12,11 @@ body {
 .p-3 {
   padding: 1rem;
 }
+.flex_reverse{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .full-screen-wrapper {
   min-height: 100vh;
   background: var(--main-bg-color); /* Установите здесь ваш цвет фона */

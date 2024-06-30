@@ -5,8 +5,8 @@ import { AppDispatch, RootState } from "../../../store";
 import "./Layout.css";
 import { setAllTodoDefault } from "../../../Slices/todoSlice/todoSlice";
 import { setAllUserDefault } from "../../../Slices/userSlice/userSlice";
-import { ThemeContext } from "../../../Context/ThemeContext";
 import { useThemeContext } from "../../../Hooks/useThemeContext";
+import { ThemeSwitcher } from "./themeSwicher/ThemeSwitcher";
 
 export const Layout = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -25,9 +25,7 @@ export const Layout = () => {
   return (
     <div className={`full-screen-wrapper p-3 ${isDark && "bg_dark"}`}>
       <header className="header">
-        <button onClick={() => changeTheme()}>
-          сменить тему оформления {`${isDark}`}
-        </button>
+        <ThemeSwitcher/>
         <p className={`header_login ${isDark && "text_dark"}`}>
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}
