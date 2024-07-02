@@ -14,7 +14,7 @@ export const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isDark, changeTheme } = useThemeContext();
+  const { theme, changeTheme } = useThemeContext();
 
   const LogOut = () => {
     dispatch(setAllTodoDefault());
@@ -23,21 +23,28 @@ export const Layout = () => {
   };
 
   return (
-    <div className={`full-screen-wrapper p-3 ${isDark && "bg_dark"}`}>
+    <div className={`full-screen-wrapper p-3 ${theme === 'dark' && "bg_dark"}`}>
       <header className="header">
-        <ThemeSwitcher/>
-        <p className={`header_login ${isDark && "text_dark"}`}>
+        <ThemeSwitcher />
+        <p className={`header_login ${theme === 'dark' && "text_dark"}`}>
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}
         </p>
         {currentUser?.login && (
-          <button className={`form_btn-redirect ${isDark && "dark_out_smaill  text_dark"}`} onClick={LogOut}>
+          <button
+            className={`form_btn-redirect ${
+              theme === 'dark' && "dark_out_small  text_dark"
+            }`}
+            onClick={LogOut}
+          >
             Выйти
           </button>
         )}
         {location.pathname === "/register" && (
           <NavLink
-            className={`form_btn-redirect ${isDark && "dark_out_smaill  text_dark"}`}
+            className={`form_btn-redirect ${
+              theme === 'dark' && "dark_out_small  text_dark"
+            }`}
             to={"login"}
           >
             уже есть аккаунт

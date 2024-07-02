@@ -51,10 +51,8 @@
   font-size: medium;
   border: none;
   margin: 8px 12px 8px 12px;
-  padding: 6px 12px;
   border-radius: 50px;
-  background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
-  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+  padding: 6px 12px;
 }
 /* .aim_input {
   margin: 16px 12px 0px 12px;
@@ -87,6 +85,9 @@
   border-radius: 50px;
   background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
+.create_aim_page{
+  margin-top: 1rem;
 }
 /* .create_aim_page {
   padding: 1rem;

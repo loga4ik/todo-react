@@ -19,7 +19,7 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
   const todoList = useSelector((state: RootState) => state.todo.todoList);
   const dispatch = useDispatch<AppDispatch>();
   const [text, setText] = useState<string>("");
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
 
   const comlitedTodo = todoList.filter((todo) => !todo.is_active);
   const newTodo = todoList.filter((todo) => todo.is_active);
@@ -42,11 +42,11 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
 
   return (
     <div className="todoBlock">
-      <div className={`pageBlock ${isDark && "dark_in_big"}`}>
-        <p className={`${isDark && "text_dark"}`}>новые задачи</p>
+      <div className={`pageBlock ${theme === 'dark' && "dark_in_big"}`}>
+        <p className={`${theme === 'dark' && "text_dark"}`}>новые задачи</p>
         <form className="todo-create-from" onSubmit={formSubmitHandler}>
           <input
-            className={`form_input ${isDark && "dark_out_smaill text_dark"}`}
+            className={`form_input ${theme === 'dark' && "dark_out_small text_dark"}`}
             type="text"
             value={text}
             placeholder="добавить новую"
@@ -54,7 +54,7 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
           />
           <div
             className={`form_add ${
-              isDark ? "dark_out_smaill" : "light_out_small"
+              theme === 'dark'  ? "dark_out_small" : "light_out_small"
             }`}
             onClick={formSubmitHandler}
           ></div>
@@ -62,8 +62,8 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
         {newTodo && <NewTodo todoList={newTodo} />}
       </div>
       {comlitedTodo[0] && (
-        <div className={`pageBlock ${isDark && "dark_in_big"}`}>
-          <p className={`${isDark && "text_dark"}`}>выполненные задачи</p>
+        <div className={`pageBlock ${theme === 'dark' && "dark_in_big"}`}>
+          <p className={`${theme === 'dark' && "text_dark"}`}>выполненные задачи</p>
           <ComplitedTodo todoList={comlitedTodo} />
         </div>
       )}

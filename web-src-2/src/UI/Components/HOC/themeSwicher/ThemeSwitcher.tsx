@@ -2,17 +2,17 @@ import React from "react";
 import { useThemeContext } from "../../../../Hooks/useThemeContext";
 import "./ThemeSwitcher.css";
 export const ThemeSwitcher = () => {
-  const { isDark, changeTheme } = useThemeContext();
+  const { theme, changeTheme } = useThemeContext();
 
   return (
     <button
-      className={`switch_btn ${isDark && "dark_out_smaill flex_reverse"}`}
+      className={`switch_btn ${theme === 'dark' && "dark_out_small flex_reverse"}`}
       onClick={() => changeTheme()}
     >
-      <p className={`switcher_text ${isDark && "text_dark"}`}>
-        {isDark ? "Dark" : "Light"}
+      <p className={`switcher_text ${theme === 'dark' && "text_dark"}`}>
+        {theme === 'dark'  ? "Dark" : "Light"}
       </p>
-      <span className={`switch_icon ${isDark ? "dark bg_dark" : "light"}`} />
+      <span className={`switch_icon ${theme === 'dark'  ? "dark bg_dark" : "light"}`} />
     </button>
   );
 };

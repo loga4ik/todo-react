@@ -1,8 +1,9 @@
 import React, { createContext, useState, ReactNode } from "react";
 
 interface ThemeContextType {
-  isDark: boolean;
-  setIsDark: (value: boolean) => void;
+  // theme: boolean;
+  theme: "light" | "dark";
+  setTheme: (value: "light" | "dark") => void;
 }
 // export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -17,14 +18,18 @@ interface ThemeProviderProps {
 export const ThemeContextWrapper: React.FC<ThemeProviderProps> = ({
   children,
 }) => {
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const localTheme = localStorage.getItem("theme");
+  const initialTheme =
+    localTheme === "light" || localTheme === "dark" ? localTheme : "light";
+
+  const [theme, setTheme] = useState<"light" | "dark">(initialTheme);
 
   const changeTheme = () => {
-    setIsDark(!isDark);
+    theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, setIsDark }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

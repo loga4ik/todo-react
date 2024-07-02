@@ -7,11 +7,13 @@ import { SubtaskForm } from "./SubtaskForm";
 import { AppDispatch, RootState } from "../../../../store";
 import { InputAimType } from "../../../../Types/AimListTypes";
 import { createUserAimList } from "../../../../Slices/todoSlice/todoSlice";
+import { useThemeContext } from "../../../../Hooks/useThemeContext";
 
 export const AimForm = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const { theme } = useThemeContext();
 
   const { register, handleSubmit, control } = useForm<InputAimType>({
     defaultValues: {
@@ -64,7 +66,9 @@ export const AimForm = () => {
           <input
             type="text"
             placeholder="цель"
-            className="aim_input"
+            className={`aim_input ${
+              theme ? "dark_out_small" : "light_out_small"
+            }`}
             {...register("text", {
               required: "обязательное поле",
               pattern: {
@@ -73,16 +77,25 @@ export const AimForm = () => {
               },
             })}
           />
-          <button className="form_btn" onClick={GoBackHandleSubmit}>
+          <button
+            className={`form_btn ${
+              theme ? "dark_out_small text_dark" : "light_out_small"
+            }`}
+            onClick={GoBackHandleSubmit}
+          >
             назад
           </button>
         </div>
         {taskFields.map((task, task_id) => (
-          <div key={task_id} className="aimForm-task">
+          <div key={task_id} className={`aimForm-task ${
+            theme ? "dark_in_big text_dark" : "light_out_big"
+          }`}>
             <input
               type="text"
               placeholder="задача"
-              className="task_input"
+              className={`task_input ${
+                theme ? "dark_out_small text_dark" : "light_out_small"
+              }`}
               {...control.register(`tasks.${task_id}.text`, {
                 required: "обязательное поле",
                 pattern: {
@@ -96,7 +109,9 @@ export const AimForm = () => {
             </div>
             <button
               type="button"
-              className="form_btn"
+              className={`form_btn ${
+                theme ? "dark_out_small text_dark" : "light_out_small"
+              }`}
               onClick={() => tasksRemove(task_id)}
             >
               удалить
@@ -104,13 +119,17 @@ export const AimForm = () => {
           </div>
         ))}
         <button
-          className="form_btn"
+          className={`form_btn ${
+            theme ? "dark_out_small text_dark" : "light_out_small"
+          }`}
           type="button"
           onClick={() => tasksAppend({ text: "", subtasks: [{ text: "" }] })}
         >
           добавить
         </button>
-        <button className="form_btn" type="submit">
+        <button className={`form_btn ${
+                theme ? "dark_out_small text_dark" : "light_out_small"
+              }`} type="submit">
           сохранить
         </button>
       </form>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Control, FieldArrayWithId, useFieldArray } from "react-hook-form";
 import { InputAimType } from "../../../../Types/AimListTypes";
+import { useThemeContext } from "../../../../Hooks/useThemeContext";
 
 type Props = {
   control: Control<InputAimType>;
@@ -17,6 +18,7 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
     control,
     name: `tasks.${task_id}.subtasks`, //"tasks.0.subtasks",
   });
+  const { theme } = useThemeContext();
 
   return (
     <>
@@ -25,7 +27,9 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
           <input
             type="text"
             placeholder="подзача"
-            className="subtask_input"
+            className={`subtask_input ${
+              theme ? "dark_out_small text_dark" : "light_out_small"
+            }`}
             {...control.register(
               `tasks.${task_id}.subtasks.${subtask_id}.text`,
               {
@@ -48,14 +52,18 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
             }
           /> */}
           <button
-            className="aimFormDelete"
+            className={`aimFormDelete ${
+              theme ? "dark_out_small text_dark" : "light_out_small"
+            }`}
             type="button"
             onClick={() => subtasksRemove(subtask_id)}
           ></button>
         </div>
       ))}
       <button
-        className="aimFormAdd"
+        className={`aimFormAdd ${
+          theme ? "dark_out_small text_dark" : "light_out_small"
+        }`}
         type="button"
         onClick={() => subtasksAppend({ text: "" })}
       ></button>

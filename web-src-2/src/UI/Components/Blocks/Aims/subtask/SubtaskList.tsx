@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const SubtaskList: React.FC<Props> = ({ subtask }) => {
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
 
-  return <div className={`subtask-element ${isDark && "text_dark subtask-element-dark"}`}>{subtask.text}</div>;
+  return <div className={`subtask-element ${theme === 'dark' && "text_dark subtask-element-dark"}`}>{subtask.text}</div>;
 };

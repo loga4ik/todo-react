@@ -14,7 +14,11 @@
   flex-wrap: wrap;
 }
 .pageBlock {
+  max-width: 480px;
+  width: 100%;
   margin-top: 2rem;
+  display: grid;
+  /* flex-direction: column; */
   padding: 1.3rem;
   border-radius: 10px;
   background-color: rgb(224, 224, 224);
@@ -53,4 +57,7 @@ body {
   color: var(--main-text-color);
   /* padding: ; */
 }
-
+.edit-from{
+  display: flex;
+  align-items: center;
+}

@@ -12,7 +12,7 @@ export const AimList = memo(() => {
   const aimList = useSelector((state: RootState) => state.todo.aimList);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (currentUser?.id) {
@@ -28,9 +28,9 @@ export const AimList = memo(() => {
   };
 
   return (
-    <div className={`pageBlock aimList ${isDark && "dark_in_big"}`}>
-      <p className={`${isDark && "text_dark"}`}>цели</p>
-      <button className={`todoPage-link ${isDark && "dark_out_smaill text_dark"}`} onClick={redirectCreateAimClickHandler}>
+    <div className={`pageBlock aimList ${theme === 'dark' && "dark_in_big"}`}>
+      <p className={`${theme === 'dark' && "text_dark"}`}>цели</p>
+      <button className={`todoPage-link ${theme === 'dark' && "dark_out_small text_dark"}`} onClick={redirectCreateAimClickHandler}>
         создать
       </button>
       <div className="dropdown">

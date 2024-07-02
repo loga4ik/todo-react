@@ -12,7 +12,7 @@ body {
 .p-3 {
   padding: 1rem;
 }
-.flex_reverse{
+.flex_reverse {
   display: flex;
   flex-direction: row-reverse;
 }
@@ -29,7 +29,7 @@ body {
   border: solid #777777 1px;
 }
 .text_dark {
-  color: var(--main-text-color-dark);
+  color: var(--main-text-color-dark) !important;
 }
 
 .dark_in_big {
@@ -42,29 +42,31 @@ body {
 }
 .dark_out_big {
   background: #404040;
-  box-shadow: 20px 20px 60px #363636, -20px -20px 60px #4a4a4a;
+  box-shadow: 30px 30px 60px #363636, -30px -30px 60px #4a4a4a;
 }
-.dark_out_smaill {
+.dark_out_small {
   border: none;
   background-color: #404040;
   box-shadow: 5px 5px 10px #363636, -5px -5px 10px #4a4a4a;
 }
-.dark_out_smaill:focus {
+.dark_out_small:focus {
   outline: none;
-}
-/* не работает (гнида) */
-.dark_out_smaill:hover:active {
-  background-color: pink;
 }
 .light_out_small {
   background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
 }
-
+.light_out_big {
+  background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
+}
 p {
   padding: 0;
   margin: 0;
   color: var(--main-text-color);
+}
+.margin-0 {
+  margin-left: 1rem;
 }
 .header {
   display: flex;

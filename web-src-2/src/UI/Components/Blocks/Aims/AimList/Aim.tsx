@@ -14,7 +14,7 @@ export const Aim: React.FC<Props> = memo(({ aim }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const taskList = useSelector((state: RootState) => state.todo.taskList);
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
 
   const tasks = useMemo(
     () => taskList?.filter((task) => task.aim_id === aim.id),
@@ -35,14 +35,14 @@ export const Aim: React.FC<Props> = memo(({ aim }) => {
     <div>
       <div
         className={`dropdown-toggle ${
-          isDark && "text_dark bg_dark border_dark"
+          theme === 'dark' && "text_dark bg_dark border_dark"
         }`}
         onClick={() => tasks && tasks[0] && setIsOpen(!isOpen)}
       >
         {aim.text}
         {tasks && tasks[0] && (
           <i
-            className={`arrow fi-rr-angle ${isDark && "fi-rr-angle-dark"} ${
+            className={`arrow fi-rr-angle ${theme === 'dark' && "fi-rr-angle-dark"} ${
               isOpen && "open"
             }`}
           ></i>

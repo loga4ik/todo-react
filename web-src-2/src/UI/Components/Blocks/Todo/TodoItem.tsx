@@ -26,7 +26,7 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const { startHover, endHover, isHovered } = useShowTime(() => {});
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
 
   const changeActiveCheckboxHadler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -54,10 +54,10 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         checked={!todo.is_active}
         onChange={changeActiveCheckboxHadler}
       />
-      <p className={`${isDark && "text_dark"}`}>{todo.id}. </p>
+      <p className={`${theme === 'dark' && "text_dark"}`}>{todo.id}. </p>
       {!isOpen ? (
         <p
-          className={`${isDark && "text_dark"}`}
+          className={`${theme === 'dark' && "text_dark"}`}
           onMouseEnter={startHover}
           onMouseLeave={endHover}
         >
@@ -73,20 +73,20 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         />
       )}
       {isHovered && (
-        <p className={`listElement_createdAt ${isDark && "text_dark"}`}>
+        <p className={`listElement_createdAt ${theme === 'dark' && "text_dark"}`}>
           {formatTime(todo.createdAt)}
         </p>
       )}
       {todo.is_active && (
         <button
           className={`edit-element ${
-            isDark ? "dark_out_smaill" : "light_out_small"
+            theme === 'dark'  ? "dark_out_small" : "light_out_small"
           } ${
             !isOpen
-              ? isDark
+              ? theme === 'dark' 
                 ? "open_element_dark"
                 : "open_element"
-              : isDark
+              : theme === 'dark' 
               ? "close_element_dark"
               : "close_element"
           } `}

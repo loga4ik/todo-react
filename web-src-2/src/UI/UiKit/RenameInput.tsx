@@ -25,11 +25,11 @@ export const RenameInput: React.FC<Props> = ({
       text: text,
     },
   });
-  const { isDark } = useThemeContext();
+  const { theme } = useThemeContext();
   const deleteItemHandler = () => {
     deleteTodo();
   };
-  
+
   const formSubmitHandler = (data: FormType) => {
     propsFunc(data.text);
     //reset - сброс значений инпута
@@ -40,28 +40,24 @@ export const RenameInput: React.FC<Props> = ({
     <form className="edit-from" onSubmit={handleSubmit(formSubmitHandler)}>
       <input
         className={`form_input ${
-          isDark ? "dark_out_smaill text_dark " : "light_out_small"
+          theme === 'dark' ? "dark_out_small text_dark " : "light_out_small"
         }`}
         type="text"
         placeholder="new title"
         {...register("text")}
       />
       <button
-        className={`edit_form_btn ${
-          isDark ? "dark_out_smaill text_dark" : "light_out_small"
-        }`}
+        className={`edit-element  margin_left_1 ${
+          theme === 'dark' ? "dark_out_small" : "light_out_small"
+        } ${theme === 'dark' ? "save_dark" : "save"} `}
         onSubmit={handleSubmit(formSubmitHandler)}
-      >
-        сохранить
-      </button>
+      />
       <button
-        className={`edit_form_btn ${
-          isDark ? "dark_out_smaill text_dark" : "light_out_small"
-        }`}
+        className={`edit-element  margin_left_1 ${
+          theme === 'dark' ? "dark_out_small" : "light_out_small"
+        } ${theme === 'dark' ? "bin_dark" : "bin"} `}
         onClick={handleSubmit(deleteItemHandler)}
-      >
-        удалить
-      </button>
+      />
     </form>
   );
 };

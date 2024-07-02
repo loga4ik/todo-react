@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ThemeContext } from "../Context/ThemeContext";
 
 export const useThemeContext = () => {
-  const { isDark, setIsDark } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const changeTheme = () => {
-    setIsDark(!isDark);
+    setTheme(theme === "light" ? "dark" : "light");
   };
-  return { isDark, changeTheme };
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  return { theme, changeTheme };
 };
