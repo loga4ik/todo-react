@@ -18,9 +18,11 @@
 }
 .todoBlock {
   width: 100%;
+  max-width: 480px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0 1rem;
 }
 .listElement_checkbox {
   margin: 0.5rem;
