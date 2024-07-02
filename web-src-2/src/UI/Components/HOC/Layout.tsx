@@ -14,7 +14,7 @@ export const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { theme, changeTheme } = useThemeContext();
+  const { theme } = useThemeContext();
 
   const LogOut = () => {
     dispatch(setAllTodoDefault());
@@ -23,17 +23,17 @@ export const Layout = () => {
   };
 
   return (
-    <div className={`full-screen-wrapper p-3 ${theme === 'dark' && "bg_dark"}`}>
+    <div className={`full-screen-wrapper p-3 ${theme === "dark" && "bg_dark"}`}>
       <header className="header">
         <ThemeSwitcher />
-        <p className={`header_login ${theme === 'dark' && "text_dark"}`}>
+        <p className={`header_login ${theme === "dark" && "text_dark"}`}>
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}
         </p>
         {currentUser?.login && (
           <button
             className={`form_btn-redirect ${
-              theme === 'dark' && "dark_out_small  text_dark"
+              theme === "dark" && "dark_out_small  text_dark"
             }`}
             onClick={LogOut}
           >
@@ -43,7 +43,7 @@ export const Layout = () => {
         {location.pathname === "/register" && (
           <NavLink
             className={`form_btn-redirect ${
-              theme === 'dark' && "dark_out_small  text_dark"
+              theme === "dark" && "dark_out_small  text_dark"
             }`}
             to={"login"}
           >
@@ -51,7 +51,12 @@ export const Layout = () => {
           </NavLink>
         )}
         {location.pathname === "/login" && (
-          <NavLink className="form_btn-redirect" to={"register"}>
+          <NavLink
+            className={`form_btn-redirect ${
+              theme === "dark" && "dark_out_small text_dark"
+            }`}
+            to={"register"}
+          >
             зарегистрироваться
           </NavLink>
         )}

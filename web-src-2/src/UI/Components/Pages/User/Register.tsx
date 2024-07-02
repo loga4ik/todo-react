@@ -9,11 +9,13 @@ import {
   setDefaultError,
 } from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
+import { useThemeContext } from "../../../../Hooks/useThemeContext";
 
 export const Register = () => {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -43,26 +45,26 @@ export const Register = () => {
   return (
     <>
       <div className="form-page">
-        <div className="form-block">
-          <div className="form-title">регистриция</div>
+        <div className={`form-block ${theme === "dark" && "dark_in_big"}`}>
+          <p className={`form-title ${theme === "dark" && "text_dark"}`}>регистриция</p>
           <form
             className="form-block_form"
             onSubmit={handleSubmit(formOnSubmitHandler)}
           >
             <input
-              className="form_input"
+              className={`form_input ${theme === "dark" && "dark_out_small text_dark"}`}
               type="text"
               placeholder="login"
               {...register("login")}
             />
             <input
-              className="form_input password_input"
+              className={`form_input password_input ${theme === "dark" && "dark_out_small text_dark"}`}
               type="password"
               placeholder="password"
               {...register("password")}
             />
             <button
-              className="form_submit_btn"
+              className={`form_submit_btn ${theme === "dark" && "dark_out_small text_dark"}`}
               onClick={handleSubmit(formOnSubmitHandler)}
             >
               отправить

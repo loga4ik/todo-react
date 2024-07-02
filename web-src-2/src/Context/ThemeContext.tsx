@@ -24,10 +24,6 @@ export const ThemeContextWrapper: React.FC<ThemeProviderProps> = ({
 
   const [theme, setTheme] = useState<"light" | "dark">(initialTheme);
 
-  const changeTheme = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
-
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
