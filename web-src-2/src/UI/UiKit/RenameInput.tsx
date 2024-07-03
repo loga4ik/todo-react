@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useThemeContext } from "../../Hooks/useThemeContext";
+import { Input } from "./Input";
 
 type FormType = {
   text: string;
@@ -25,7 +25,6 @@ export const RenameInput: React.FC<Props> = ({
       text: text,
     },
   });
-  const { theme } = useThemeContext();
   const deleteItemHandler = () => {
     deleteTodo();
   };
@@ -38,24 +37,22 @@ export const RenameInput: React.FC<Props> = ({
   };
   return (
     <form className="edit-from" onSubmit={handleSubmit(formSubmitHandler)}>
-      <input
-        className={`form_input ${
-          theme === 'dark' ? "dark_out_small text_dark " : "light_out_small"
-        }`}
-        type="text"
+      <Input
+        className="form_input"
+        inputType="text"
         placeholder="new title"
-        {...register("text")}
+        register={{ ...register("text") }}
       />
-      <button
-        className={`edit-element  margin_left_1 ${
-          theme === 'dark' ? "dark_out_small" : "light_out_small"
-        } ${theme === 'dark' ? "save_dark" : "save"} `}
-        onSubmit={handleSubmit(formSubmitHandler)}
+      <Input
+        inputType="btn"
+        className="edit-element  margin_left_1"
+        changableIconClass="save"
+        onClick={handleSubmit(formSubmitHandler)}
       />
-      <button
-        className={`edit-element  margin_left_1 ${
-          theme === 'dark' ? "dark_out_small" : "light_out_small"
-        } ${theme === 'dark' ? "bin_dark" : "bin"} `}
+      <Input
+        inputType="btn"
+        className="edit-element  margin_left_1"
+        changableIconClass="bin"
         onClick={handleSubmit(deleteItemHandler)}
       />
     </form>

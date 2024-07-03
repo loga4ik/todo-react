@@ -8,6 +8,8 @@ import { AppDispatch, RootState } from "../../../../store";
 import { InputAimType } from "../../../../Types/AimListTypes";
 import { createUserAimList } from "../../../../Slices/todoSlice/todoSlice";
 import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Input } from "../../../UIKit/Input";
+import { Wrapper } from "../../../UIKit/Wrapper";
 
 export const AimForm = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -38,7 +40,6 @@ export const AimForm = () => {
     remove: tasksRemove,
   } = useFieldArray({
     control,
-    // rules: { required: "обязательное поле", minLength: 1 },
     name: "tasks",
   });
 
@@ -63,12 +64,10 @@ export const AimForm = () => {
         className="create_aim_page"
       >
         <div className="form_head">
-          <input
-            type="text"
+          <Input
+            inputType="text"
             placeholder="цель"
-            className={`aim_input ${
-              theme ? "dark_out_small" : "light_out_small"
-            }`}
+            className="aim_input"
             {...register("text", {
               required: "обязательное поле",
               pattern: {
@@ -77,25 +76,20 @@ export const AimForm = () => {
               },
             })}
           />
-          <button
-            className={`form_btn ${
-              theme ? "dark_out_small text_dark" : "light_out_small"
-            }`}
+          <Input
+            inputType="btn"
+            className="form_btn"
             onClick={GoBackHandleSubmit}
           >
             назад
-          </button>
+          </Input>
         </div>
         {taskFields.map((task, task_id) => (
-          <div key={task_id} className={`aimForm-task ${
-            theme ? "dark_in_big text_dark" : "light_out_big"
-          }`}>
-            <input
-              type="text"
+          <Wrapper key={`${task_id}`} className="aimForm-task">
+            <Input
+              inputType="text"
               placeholder="задача"
-              className={`task_input ${
-                theme ? "dark_out_small text_dark" : "light_out_small"
-              }`}
+              className="task_input"
               {...control.register(`tasks.${task_id}.text`, {
                 required: "обязательное поле",
                 pattern: {
@@ -103,35 +97,30 @@ export const AimForm = () => {
                   message: "This input is rus only.",
                 },
               })}
+              //это надо как-то пропсануть
             />
             <div className="subTask">
               <SubtaskForm control={control} task={task} task_id={task_id} />
             </div>
-            <button
-              type="button"
-              className={`form_btn ${
-                theme ? "dark_out_small text_dark" : "light_out_small"
-              }`}
+            <Input
+              inputType="btn"
+              className="form_btn"
               onClick={() => tasksRemove(task_id)}
             >
               удалить
-            </button>
-          </div>
+            </Input>
+          </Wrapper>
         ))}
-        <button
-          className={`form_btn ${
-            theme ? "dark_out_small text_dark" : "light_out_small"
-          }`}
-          type="button"
+        <Input
+          className="form_btn"
+          inputType="btn"
           onClick={() => tasksAppend({ text: "", subtasks: [{ text: "" }] })}
         >
           добавить
-        </button>
-        <button className={`form_btn ${
-                theme ? "dark_out_small text_dark" : "light_out_small"
-              }`} type="submit">
+        </Input>
+        <Input className="form_btn" inputType="btn">
           сохранить
-        </button>
+        </Input>
       </form>
     </>
   );

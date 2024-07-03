@@ -8,9 +8,15 @@ import {
 import { TodoItem } from "./TodoItem";
 import { CurrentUser } from "../../../../Slices/userSlice/userSlice";
 import "./Todo.css";
-import { ComplitedTodo } from "./ComplitedTodo";
-import { NewTodo } from "./NewTodo";
+import { ComplitedTodos } from "./ComplitedTodos";
+import { NewTodos } from "./NewTodos";
 import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Wrapper } from "../../../UIKit/Wrapper";
+import { Input } from "../../../UIKit/Input";
+import { useForm } from "react-hook-form";
+type FormType = {
+  text: string;
+};
 type Props = {
   currentUser: CurrentUser;
 };
@@ -19,7 +25,6 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
   const todoList = useSelector((state: RootState) => state.todo.todoList);
   const dispatch = useDispatch<AppDispatch>();
   const [text, setText] = useState<string>("");
-  const { theme } = useThemeContext();
 
   const comlitedTodo = todoList.filter((todo) => !todo.is_active);
   const newTodo = todoList.filter((todo) => todo.is_active);
@@ -30,10 +35,13 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
     }
   }, [currentUser, dispatch]);
 
-  const formSubmitHandler = (
-    e: React.FormEvent<HTMLFormElement | HTMLDivElement>
-  ) => {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm<FormType>({
+    defaultValues: {
+      text: "",
+    },
+  });
+
+  const formSubmitHandler = () => {
     if (currentUser?.id && text) {
       dispatch(createUserTodo({ user_id: currentUser.id, text: text }));
       setText("");
@@ -42,41 +50,34 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
 
   return (
     <div className="todoBlock">
-      <div className={`pageBlock ${theme === 'dark' && "dark_in_big"}`}>
-        <p className={`${theme === 'dark' && "text_dark"}`}>новые задачи</p>
-        <form className="todo-create-from" onSubmit={formSubmitHandler}>
-          <input
-            className={`form_input ${theme === 'dark' && "dark_out_small text_dark"}`}
-            type="text"
+      <Wrapper className="pageBlock">
+        <p>новые задачи</p>
+        <form
+          className="todo-create-from"
+          onSubmit={handleSubmit(formSubmitHandler)}
+        >
+          <Input
+            className="form_input"
+            inputType="text"
             value={text}
             placeholder="добавить новую"
             onChange={(e) => setText(e.target.value)}
+            register={{ ...register("text") }}
           />
-          <div
-            className={`form_add ${
-              theme === 'dark'  ? "dark_out_small" : "light_out_small"
-            }`}
-            onClick={formSubmitHandler}
-          ></div>
+          <Input
+            inputType="btn"
+            className="form_add btn_image"
+            onClick={handleSubmit(formSubmitHandler)}
+          />
         </form>
-        {newTodo && <NewTodo todoList={newTodo} />}
-      </div>
+        {newTodo && <NewTodos todoList={newTodo} />}
+      </Wrapper>
       {comlitedTodo[0] && (
-        <div className={`pageBlock ${theme === 'dark' && "dark_in_big"}`}>
-          <p className={`${theme === 'dark' && "text_dark"}`}>выполненные задачи</p>
-          <ComplitedTodo todoList={comlitedTodo} />
-        </div>
+        <Wrapper className="pageBlock">
+          <p>выполненные задачи</p>
+          <ComplitedTodos todoList={comlitedTodo} />
+        </Wrapper>
       )}
     </div>
   );
 };
-// {newTodo &&
-//         newTodo.map((todo) => <TodoItem key={`todo.${todo.id}`} todo={todo} />)}
-//       {comlitedTodo && (
-//         <>
-//           <hr />
-//           {comlitedTodo.map((todo) => (
-//             <TodoItem key={`todo.${todo.id}`} todo={todo} />
-//           ))}
-//         </>
-//       )}

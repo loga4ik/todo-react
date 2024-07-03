@@ -11,3 +11,8 @@ export const useThemeContext = () => {
   }, [theme]);
   return { theme, changeTheme };
 };
+
+// use local storage
+
+// возвращаем состояние и func изменения состояния
+// передаем ключ и значение по умолчанию

@@ -6,7 +6,8 @@ import "./Layout.css";
 import { setAllTodoDefault } from "../../../Slices/todoSlice/todoSlice";
 import { setAllUserDefault } from "../../../Slices/userSlice/userSlice";
 import { useThemeContext } from "../../../Hooks/useThemeContext";
-import { ThemeSwitcher } from "./themeSwicher/ThemeSwitcher";
+import { ThemeSwitcher } from "../../UIKit/themeSwicher/ThemeSwitcher";
+import { Input } from "../../UIKit/Input";
 
 export const Layout = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -23,22 +24,25 @@ export const Layout = () => {
   };
 
   return (
-    <div className={`full-screen-wrapper p-3 ${theme === "dark" && "bg_dark"}`}>
+    <div
+      className={`full-screen-wrapper p-3 ${
+        theme === "dark" ? "bg_dark text_dark" : "text_light"
+      }`}
+    >
       <header className="header">
         <ThemeSwitcher />
-        <p className={`header_login ${theme === "dark" && "text_dark"}`}>
+        <p className={`header_login`}>
           {currentUser?.login && <span className="header_label">логин: </span>}
           {currentUser?.login}
         </p>
         {currentUser?.login && (
-          <button
-            className={`form_btn-redirect ${
-              theme === "dark" && "dark_out_small  text_dark"
-            }`}
+          <Input
+            inputType="btn"
+            className={"form_btn-redirect"}
             onClick={LogOut}
           >
             Выйти
-          </button>
+          </Input>
         )}
         {location.pathname === "/register" && (
           <NavLink

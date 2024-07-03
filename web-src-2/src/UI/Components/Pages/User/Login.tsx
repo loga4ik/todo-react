@@ -1,26 +1,17 @@
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AppDispatch, RootState } from "../../../../store";
-import {
-  getCookie,
-  loginUser,
-  setDefaultError,
-} from "../../../../Slices/userSlice/userSlice";
+import { loginUser } from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Wrapper } from "../../../UIKit/Wrapper";
+import { Input } from "../../../UIKit/Input";
 
 export const Login = () => {
   const { error } = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { theme } = useThemeContext();
-
-  const redirectOnClick = () => {
-    navigate("/register");
-  };
 
   const { register, handleSubmit } = useForm<UserData>({
     defaultValues: {
@@ -30,6 +21,8 @@ export const Login = () => {
   });
 
   const formOnSubmitHandler = (data: UserData) => {
+    console.log(data);
+    
     (async () => {
       const query = await dispatch(loginUser(data));
       query.meta.requestStatus === "fulfilled" && navigate("/");
@@ -40,32 +33,33 @@ export const Login = () => {
     <>
       {error}
       <div className="form-page">
-        <div className={`form-block ${theme === "dark" && "dark_in_big"}`}>
-          <p className={`form-title ${theme === "dark" && "text_dark"}`}>войти</p>
+        <Wrapper className="form-block ">
+          <p className="form-title">войти</p>
           <form
             className="form-block_form"
             onSubmit={handleSubmit(formOnSubmitHandler)}
           >
-            <input
-              className={`form_input ${theme === "dark" && "dark_out_small text_dark"}`}
-              type="text"
+            <Input
+              className={"form_input"}
+              inputType="text"
               placeholder="login"
-              {...register("login")}
+              register={{ ...register("login") }}
             />
-            <input
-              className={`form_input password_input ${theme === "dark" && "dark_out_small text_dark"}`}
-              type="password"
+            <Input
+              className={"form_input password_input"}
+              inputType="password"
               placeholder="password"
-              {...register("password")}
+              register={{ ...register("password") }}
             />
-            <button
-              className={`form_submit_btn ${theme === "dark" && "dark_out_small text_dark"}`}
+            <Input
+              inputType="btn"
+              className={"form_submit_btn"}
               onClick={handleSubmit(formOnSubmitHandler)}
             >
               отправить
-            </button>
+            </Input>
           </form>
-        </div>
+        </Wrapper>
       </div>
     </>
   );

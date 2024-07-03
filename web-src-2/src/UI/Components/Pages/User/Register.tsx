@@ -9,13 +9,13 @@ import {
   setDefaultError,
 } from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Wrapper } from "../../../UIKit/Wrapper";
+import { Input } from "../../../UIKit/Input";
 
 export const Register = () => {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -45,33 +45,97 @@ export const Register = () => {
   return (
     <>
       <div className="form-page">
-        <div className={`form-block ${theme === "dark" && "dark_in_big"}`}>
-          <p className={`form-title ${theme === "dark" && "text_dark"}`}>регистриция</p>
+        <Wrapper className="form-block">
+          <p className="form-title">регистриция</p>
           <form
             className="form-block_form"
             onSubmit={handleSubmit(formOnSubmitHandler)}
           >
-            <input
-              className={`form_input ${theme === "dark" && "dark_out_small text_dark"}`}
-              type="text"
+            <Input
+              className={"form_input"}
+              inputType="text"
               placeholder="login"
-              {...register("login")}
+              register={{ ...register("login") }}
             />
-            <input
-              className={`form_input password_input ${theme === "dark" && "dark_out_small text_dark"}`}
-              type="password"
+            <Input
+              className={"form_input password_input"}
+              inputType="password"
               placeholder="password"
-              {...register("password")}
+              register={{ ...register("password") }}
             />
-            <button
-              className={`form_submit_btn ${theme === "dark" && "dark_out_small text_dark"}`}
+            <Input
+              inputType="btn"
+              className={"form_submit_btn"}
               onClick={handleSubmit(formOnSubmitHandler)}
             >
               отправить
-            </button>
+            </Input>
           </form>
-        </div>
+        </Wrapper>
       </div>
     </>
   );
 };
+
+// type Props = {
+//   input: {
+//    name?: string
+//    onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+//    onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+//    type?: InputProps['type']
+//    value: string
+//   }
+//   className?: string
+//   label?: string
+//   maxLength?: number
+//   meta?: { error?: string; touched?: boolean }
+//   number?: boolean
+//   placeholder?: string
+//   readOnly?: boolean
+//   required?: boolean
+//  }
+
+//  export default function TextInput({
+//   input,
+//   className,
+//   label,
+//   placeholder = '',
+//   readOnly = false,
+//   required,
+//   maxLength,
+//   meta,
+//   number = false,
+//  }: Props) {
+//   const length = input.value?.length
+//   const title = maxLength && length && !readOnly ? `${length}/${maxLength}` : ''
+//   const type = number ? 'number' : input.type
+
+//   return (
+//    <FormGroup {...meta} className={className} label={label} required={required}>
+//     {type === 'textarea' ? (
+//      <TextareaAutosize
+//       {...input}
+//       value={input.value ?? ''}
+//       aria-label={label}
+//       autoComplete="new-password"
+//       className="col"
+//       placeholder={placeholder}
+//       readOnly={readOnly}
+//       title={title}
+//      />
+//     ) : (
+//      <Input
+//       {...input}
+//       value={input.value ?? ''}
+//       aria-label={label}
+//       autoComplete="new-password"
+//       className="col"
+//       placeholder={placeholder}
+//       readOnly={readOnly}
+//       title={title}
+//       type={type}
+//      />
+//     )}
+//    </FormGroup>
+//   )
+//  }

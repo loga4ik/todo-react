@@ -7,14 +7,7 @@ import { AimForm } from "../Components/Pages/CreateAim/AimForm";
 import { Layout } from "../Components/HOC/Layout";
 
 function App() {
-  // const dispatch = useDispatch<AppDispatch>();
-  // useEffect(() => {
-  //   // dispatch(setAllTodoDefault());
-  //   return () => {
-  //     dispatch(setAllTodoDefault());
-  //   };
-  // }, [dispatch]);
-
+//тут получу тему из localStorage
   return (
     <BrowserRouter>
       <Routes>

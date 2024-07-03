@@ -4,7 +4,7 @@ import { TodoItem } from "./TodoItem";
 type TodoList = {
   todoList: TodoType[];
 };
-export const ComplitedTodo: React.FC<TodoList> = memo(({ todoList }) => {
+export const ComplitedTodos: React.FC<TodoList> = memo(({ todoList }) => {
   return (
     <>
       {todoList.map((todo) => (

@@ -23,12 +23,19 @@ export const TaskList: React.FC<Props> = memo(({ task }) => {
   return (
     <div className="taskList">
       <div>
-        <div className={`dropdown-toggle ${
-          theme === 'dark' && "text_dark bg_dark border_dark"
-        }`} onClick={() => setIsOpen(!isOpen)}>
+        <div
+          className={`dropdown-toggle ${
+            theme === "dark" && "text_dark bg_dark border_dark"
+          }`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {task.text}
           {subtasks && subtasks[0] && (
-            <i className={`fi-rr-angle ${theme === 'dark' && "fi-rr-angle-dark"} ${isOpen ? "open" : "close"}`}></i>
+            <i
+              className={`fi-rr-angle ${
+                theme === "dark" && "fi-rr-angle-dark"
+              } ${isOpen ? "open" : "close"}`}
+            ></i>
           )}
         </div>
         {isOpen &&

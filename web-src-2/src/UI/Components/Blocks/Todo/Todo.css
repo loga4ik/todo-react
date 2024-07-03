@@ -12,7 +12,7 @@
   margin-top: 0.3rem;
 }
 .listElement_createdAt {
-  color: var(--main-text-color);
+  /* color: var(--main-text-color); */
   position: absolute;
   right: 50px;
 }
@@ -29,6 +29,23 @@
   height: 1.5rem;
   width: 1.5rem;
   accent-color: var(--main-bg-color);
+}
+.listElement_checkbox {
+  /* ...existing styles */
+  display: grid;
+  place-content: center;
+}
+.listElement_checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+.listElement_checkbox:checked::before {
+  transform: scale(1);
 }
 
 .todo-create-from > .form_input {
@@ -49,30 +66,33 @@
   background-repeat: no-repeat;
 }
 .open_element {
-  background-image: url(/public/img/edit.svg);
+  background-image: url(/public/img/edit.svg) !important;
 }
 .open_element_dark {
-  background-image: url(/public/img/edit_dark.svg);
+  background-image: url(/public/img/edit_dark.svg) !important;
 }
 .close_element {
-  background-image: url(/public/img/edit_crossed.svg);
+  background-image: url(/public/img/edit_crossed.svg) !important;
 }
 .close_element_dark {
-  background-image: url(/public/img/edit_crossed_dark.svg);
+  background-image: url(/public/img/edit_crossed_dark.svg) !important;
 }
 .bin {
-  background-image: url(/public/img/bin.svg);
+  background-image: url(/public/img/bin.svg) !important;
 }
 .bin_dark {
-  background-image: url(/public/img/bin-dark.svg);
+  background-image: url(/public/img/bin-dark.svg) !important;
 }
 .save {
-  background-image: url(/public/img/save.svg);
+  background-image: url(/public/img/save.svg) !important;
 }
 .save_dark {
-  background-image: url(/public/img/save-dark.svg);
+  background-image: url(/public/img/save-dark.svg) !important;
 }
-
+.btn_image{
+  background-position: center;
+  
+}
 .todo-create-from {
   display: flex;
   align-items: flex-end;
@@ -82,7 +102,7 @@
   padding: 14px;
   cursor: pointer;
   border-radius: 10rem;
-  background-image: url(/public/img/plus.svg);
+  background-image: url(/public/img/plus.svg) !important;
   background-position: center;
   background-repeat: no-repeat;
 }

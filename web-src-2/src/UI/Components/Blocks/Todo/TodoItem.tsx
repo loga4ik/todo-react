@@ -10,7 +10,7 @@ import {
 import { RenameInput } from "../../../UIKit/RenameInput";
 import useShowTime from "../../../../Hooks/useShowTime";
 import { formatTime } from "../../../../scripts/formatTime";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Input } from "../../../UIKit/Input";
 type TodoType = {
   id: number;
   text: string;
@@ -26,7 +26,6 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const { startHover, endHover, isHovered } = useShowTime(() => {});
-  const { theme } = useThemeContext();
 
   const changeActiveCheckboxHadler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -34,6 +33,7 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
     e.preventDefault();
     dispatch(switchActiveTodo({ todoId: todo.id }));
   };
+
   const chengeTodoText = useCallback(
     (text: string) => {
       dispatch(updateUserTodo({ todo_id: todo.id, text }));
@@ -54,13 +54,9 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         checked={!todo.is_active}
         onChange={changeActiveCheckboxHadler}
       />
-      <p className={`${theme === 'dark' && "text_dark"}`}>{todo.id}. </p>
+      <p>{todo.id}. </p>
       {!isOpen ? (
-        <p
-          className={`${theme === 'dark' && "text_dark"}`}
-          onMouseEnter={startHover}
-          onMouseLeave={endHover}
-        >
+        <p onMouseEnter={startHover} onMouseLeave={endHover}>
           {todo.text}
         </p>
       ) : (
@@ -73,23 +69,15 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         />
       )}
       {isHovered && (
-        <p className={`listElement_createdAt ${theme === 'dark' && "text_dark"}`}>
-          {formatTime(todo.createdAt)}
-        </p>
+        <p className="listElement_createdAt">{formatTime(todo.createdAt)}</p>
       )}
       {todo.is_active && (
-        <button
-          className={`edit-element ${
-            theme === 'dark'  ? "dark_out_small" : "light_out_small"
-          } ${
-            !isOpen
-              ? theme === 'dark' 
-                ? "open_element_dark"
-                : "open_element"
-              : theme === 'dark' 
-              ? "close_element_dark"
-              : "close_element"
-          } `}
+        <Input
+          inputType="btn"
+          className="edit-element"
+          changableIconClass={`${!isOpen ? "open_element" : "close_element"}`}
+          //отправлять класс с флагом в кастомный инпут
+
           onClick={() => setIsOpen(!isOpen)}
         />
       )}

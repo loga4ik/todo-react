@@ -1,6 +1,6 @@
 import React from "react";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
 import "./ThemeSwitcher.css";
+import { useThemeContext } from "../../../Hooks/useThemeContext";
 export const ThemeSwitcher = () => {
   const { theme, changeTheme } = useThemeContext();
 

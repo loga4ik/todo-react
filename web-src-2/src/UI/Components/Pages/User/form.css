@@ -20,7 +20,7 @@
 
 .form-title {
   font-size: larger;
-  color: var(--main-text-color);
+  /* color: var(--main-text-color); */
 }
 
 .form-block_form {
@@ -42,7 +42,7 @@
   margin: 16px 12px 0px 12px;
   padding: 6px 12px;
   border-radius: 50px;
-  background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
+  /* background-color: var(--main-bg-light-gradient); */
   box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
 }
 
@@ -62,15 +62,9 @@
   color: var(--main-text-color);
   border: none;
   border-radius: 50px;
-  background-color: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 6px 6px 14px #a1a1a1, -6px -6px 14px #ffffff;
 }
 .form_submit_btn {
   margin-top: 16px;
   align-self: flex-start;
 }
-
-/* .form_submit_btn:hover {
-  background: #e0e0e0;
-  box-shadow: inset 6px 6px 12px #949494, inset -6px -6px 12px #ffffff;
-} */

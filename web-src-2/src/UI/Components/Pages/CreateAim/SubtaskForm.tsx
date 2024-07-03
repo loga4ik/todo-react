@@ -2,6 +2,7 @@ import React from "react";
 import { Control, FieldArrayWithId, useFieldArray } from "react-hook-form";
 import { InputAimType } from "../../../../Types/AimListTypes";
 import { useThemeContext } from "../../../../Hooks/useThemeContext";
+import { Input } from "../../../UIKit/Input";
 
 type Props = {
   control: Control<InputAimType>;
@@ -24,12 +25,10 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
     <>
       {subtakFields.map((subtask, subtask_id) => (
         <div key={`subtask${subtask_id}`} className="form_subtask">
-          <input
-            type="text"
+          <Input
+            inputType="text"
             placeholder="подзача"
-            className={`subtask_input ${
-              theme ? "dark_out_small text_dark" : "light_out_small"
-            }`}
+            className="subtask_input"
             {...control.register(
               `tasks.${task_id}.subtasks.${subtask_id}.text`,
               {
@@ -41,32 +40,22 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
               }
             )}
           />
-          {/* <ErrorMessage
-            errors={errors}
-            name="multipleErrorInput"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type}>{message}</p>
-              ))
-            }
-          /> */}
-          <button
+          <Input
             className={`aimFormDelete ${
               theme ? "dark_out_small text_dark" : "light_out_small"
             }`}
-            type="button"
+            inputType="btn"
             onClick={() => subtasksRemove(subtask_id)}
-          ></button>
+          />
         </div>
       ))}
-      <button
+      <Input
         className={`aimFormAdd ${
           theme ? "dark_out_small text_dark" : "light_out_small"
         }`}
-        type="button"
+        inputType="btn"
         onClick={() => subtasksAppend({ text: "" })}
-      ></button>
+      />
     </>
   );
 };
