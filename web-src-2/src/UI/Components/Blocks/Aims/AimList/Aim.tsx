@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { memo, useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AimType } from "../../../../../Types/AimListTypes";
 import { AppDispatch, RootState } from "../../../../../store";
 import { userTasksAndSubtasks } from "../../../../../Slices/todoSlice/todoSlice";
 import { TaskList } from "../Tasks/TaskList";
 import { useThemeContext } from "../../../../../Hooks/useThemeContext";
+import { ThemeContext } from "../../../../../Context/ThemeContext";
 
 type Props = {
   aim: AimType;
@@ -14,7 +15,7 @@ export const Aim: React.FC<Props> = memo(({ aim }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const taskList = useSelector((state: RootState) => state.todo.taskList);
-  const { theme } = useThemeContext();
+  const { theme } = useContext(ThemeContext);
 
   const tasks = useMemo(
     () => taskList?.filter((task) => task.aim_id === aim.id),
@@ -26,10 +27,6 @@ export const Aim: React.FC<Props> = memo(({ aim }) => {
       dispatch(userTasksAndSubtasks({ aimId: aim.id }));
     }
   }, [aim, dispatch]);
-
-  // useEffect(() => {
-  //   console.log(taskList);
-  // }, [taskList]);
 
   return (
     <div>

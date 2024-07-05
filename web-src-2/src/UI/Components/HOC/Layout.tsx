@@ -8,6 +8,8 @@ import { setAllUserDefault } from "../../../Slices/userSlice/userSlice";
 import { useThemeContext } from "../../../Hooks/useThemeContext";
 import { ThemeSwitcher } from "../../UIKit/themeSwicher/ThemeSwitcher";
 import { Input } from "../../UIKit/Input";
+import { useLocalStorage } from "../../../Hooks/useLocalStorage";
+import { ThemeContext } from "../../../Context/ThemeContext";
 
 export const Layout = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -15,7 +17,7 @@ export const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { theme } = useThemeContext();
+  const { theme } = useContext(ThemeContext);
 
   const LogOut = () => {
     dispatch(setAllTodoDefault());

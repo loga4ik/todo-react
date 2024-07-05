@@ -1,17 +1,17 @@
-import React, { FC, ReactNode } from "react";
-import { useThemeContext } from "../../Hooks/useThemeContext";
+import React, { ReactNode, useContext } from "react";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 type props = {
   className?: string;
-  key?: string;
+  itemKey?: string;
   children: ReactNode;
 };
 
-export const Wrapper: React.FC<props> = ({ children, className, key }) => {
-  const { theme } = useThemeContext();
+export const Wrapper: React.FC<props> = ({ children, className, itemKey }) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <div
-      key={key}
+      key={itemKey}
       className={`wrapper ${theme === "dark" && "dark_in_big"} ${className}`}
     >
       {children}

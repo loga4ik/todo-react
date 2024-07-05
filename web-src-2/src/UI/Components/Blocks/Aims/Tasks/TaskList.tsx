@@ -1,9 +1,10 @@
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useContext, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { TaskType } from "../../../../../Types/AimListTypes";
 import { RootState } from "../../../../../store";
 import { SubtaskList } from "../subtask/SubtaskList";
 import { useThemeContext } from "../../../../../Hooks/useThemeContext";
+import { ThemeContext } from "../../../../../Context/ThemeContext";
 
 type Props = {
   task: TaskType;
@@ -12,7 +13,7 @@ type Props = {
 export const TaskList: React.FC<Props> = memo(({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
   const subtaskList = useSelector((state: RootState) => state.todo.subtaskList);
-  const { theme } = useThemeContext();
+  const { theme } = useContext(ThemeContext);
 
   //получается у нас не будет лишней фильтрации при посторной отрисовке компанента
   const subtasks = useMemo(

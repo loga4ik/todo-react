@@ -5,15 +5,15 @@ import {
   createUserTodo,
   userTodos,
 } from "../../../../Slices/todoSlice/todoSlice";
-import { TodoItem } from "./TodoItem";
 import { CurrentUser } from "../../../../Slices/userSlice/userSlice";
 import "./Todo.css";
 import { ComplitedTodos } from "./ComplitedTodos";
 import { NewTodos } from "./NewTodos";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
 import { Wrapper } from "../../../UIKit/Wrapper";
-import { Input } from "../../../UIKit/Input";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import Input from "../../../UIKit/Inputs/Input";
+import { Button } from "../../../UIKit/Inputs/Button";
+
 type FormType = {
   text: string;
 };
@@ -24,7 +24,7 @@ type Props = {
 export const TodoList: React.FC<Props> = ({ currentUser }) => {
   const todoList = useSelector((state: RootState) => state.todo.todoList);
   const dispatch = useDispatch<AppDispatch>();
-  const [text, setText] = useState<string>("");
+  // const [text, setText] = useState<string>("");
 
   const comlitedTodo = todoList.filter((todo) => !todo.is_active);
   const newTodo = todoList.filter((todo) => todo.is_active);
@@ -35,17 +35,15 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
     }
   }, [currentUser, dispatch]);
 
-  const { register, handleSubmit } = useForm<FormType>({
+  const { register, handleSubmit, reset } = useForm<FormType>({
     defaultValues: {
       text: "",
     },
   });
 
-  const formSubmitHandler = () => {
-    if (currentUser?.id && text) {
-      dispatch(createUserTodo({ user_id: currentUser.id, text: text }));
-      setText("");
-    }
+  const formSubmitHandler = (data: FormType) => {
+    dispatch(createUserTodo({ user_id: currentUser.id, text: data.text }));
+    reset();
   };
 
   return (
@@ -59,13 +57,11 @@ export const TodoList: React.FC<Props> = ({ currentUser }) => {
           <Input
             className="form_input"
             inputType="text"
-            value={text}
             placeholder="добавить новую"
-            onChange={(e) => setText(e.target.value)}
-            register={{ ...register("text") }}
+            register={register("text")}
           />
-          <Input
-            inputType="btn"
+          <Button
+            type="submit"
             className="form_add btn_image"
             onClick={handleSubmit(formSubmitHandler)}
           />

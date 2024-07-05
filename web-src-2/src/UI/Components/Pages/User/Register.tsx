@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./form.css";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "../../../../store";
@@ -10,7 +10,8 @@ import {
 } from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
 import { Wrapper } from "../../../UIKit/Wrapper";
-import { Input } from "../../../UIKit/Input";
+import Input from "../../../UIKit/Inputs/Input";
+import { Button } from "../../../UIKit/Inputs/Button";
 
 export const Register = () => {
   const { currentUser } = useSelector((state: RootState) => state.user);
@@ -31,7 +32,7 @@ export const Register = () => {
     //тут можно будет потом нарисовать какое-нибудь уведомление
   }, [currentUser, navigate]);
 
-  const { register, handleSubmit } = useForm<UserData>({
+  const { register, handleSubmit, control } = useForm<UserData>({
     defaultValues: {
       login: "",
       password: "",
@@ -51,25 +52,37 @@ export const Register = () => {
             className="form-block_form"
             onSubmit={handleSubmit(formOnSubmitHandler)}
           >
-            <Input
-              className={"form_input"}
-              inputType="text"
-              placeholder="login"
-              register={{ ...register("login") }}
+            <Controller
+              name="login"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  className={"form_input"}
+                  inputType="text"
+                  placeholder="login"
+                  {...field}
+                />
+              )}
             />
-            <Input
-              className={"form_input password_input"}
-              inputType="password"
-              placeholder="password"
-              register={{ ...register("password") }}
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  className={"form_input"}
+                  inputType="password"
+                  placeholder="password"
+                  {...field}
+                />
+              )}
             />
-            <Input
-              inputType="btn"
+            <Button
+              type="submit"
               className={"form_submit_btn"}
               onClick={handleSubmit(formOnSubmitHandler)}
             >
               отправить
-            </Input>
+            </Button>
           </form>
         </Wrapper>
       </div>

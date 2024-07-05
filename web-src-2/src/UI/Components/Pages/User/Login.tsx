@@ -5,7 +5,8 @@ import { AppDispatch, RootState } from "../../../../store";
 import { loginUser } from "../../../../Slices/userSlice/userSlice";
 import { UserData } from "../../../../Slices/userSlice/userApi";
 import { Wrapper } from "../../../UIKit/Wrapper";
-import { Input } from "../../../UIKit/Input";
+import Input from "../../../UIKit/Inputs/Input";
+import { Button } from "../../../UIKit/Inputs/Button";
 
 export const Login = () => {
   const { error } = useSelector((state: RootState) => state.user);
@@ -13,7 +14,7 @@ export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<UserData>({
+  const { handleSubmit, register } = useForm<UserData>({
     defaultValues: {
       login: "",
       password: "",
@@ -21,8 +22,6 @@ export const Login = () => {
   });
 
   const formOnSubmitHandler = (data: UserData) => {
-    console.log(data);
-    
     (async () => {
       const query = await dispatch(loginUser(data));
       query.meta.requestStatus === "fulfilled" && navigate("/");
@@ -40,24 +39,24 @@ export const Login = () => {
             onSubmit={handleSubmit(formOnSubmitHandler)}
           >
             <Input
-              className={"form_input"}
+              className="form_input"
               inputType="text"
               placeholder="login"
-              register={{ ...register("login") }}
+              register={register("login")}
             />
             <Input
-              className={"form_input password_input"}
+              className="form_input password_input"
               inputType="password"
               placeholder="password"
-              register={{ ...register("password") }}
+              register={register("password")}
             />
-            <Input
-              inputType="btn"
+            <Button
               className={"form_submit_btn"}
+              type="submit"
               onClick={handleSubmit(formOnSubmitHandler)}
             >
               отправить
-            </Input>
+            </Button>
           </form>
         </Wrapper>
       </div>

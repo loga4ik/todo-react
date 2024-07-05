@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "./Input";
+import Input from "./Inputs/Input";
+import { Button } from "./Inputs/Button";
 
 type FormType = {
   text: string;
@@ -41,16 +42,15 @@ export const RenameInput: React.FC<Props> = ({
         className="form_input"
         inputType="text"
         placeholder="new title"
-        register={{ ...register("text") }}
+        register={register("text")}
       />
-      <Input
-        inputType="btn"
+      <Button
+        type="submit"
         className="edit-element  margin_left_1"
         changableIconClass="save"
-        onClick={handleSubmit(formSubmitHandler)}
       />
-      <Input
-        inputType="btn"
+      <Button
+        type="button"
         className="edit-element  margin_left_1"
         changableIconClass="bin"
         onClick={handleSubmit(deleteItemHandler)}

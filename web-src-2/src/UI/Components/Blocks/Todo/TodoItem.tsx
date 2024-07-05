@@ -10,7 +10,7 @@ import {
 import { RenameInput } from "../../../UIKit/RenameInput";
 import useShowTime from "../../../../Hooks/useShowTime";
 import { formatTime } from "../../../../scripts/formatTime";
-import { Input } from "../../../UIKit/Input";
+import { Button } from "../../../UIKit/Inputs/Button";
 type TodoType = {
   id: number;
   text: string;
@@ -72,12 +72,11 @@ export const TodoItem: React.FC<Props> = memo(({ todo }) => {
         <p className="listElement_createdAt">{formatTime(todo.createdAt)}</p>
       )}
       {todo.is_active && (
-        <Input
-          inputType="btn"
+        <Button
+          type="button"
           className="edit-element"
           changableIconClass={`${!isOpen ? "open_element" : "close_element"}`}
           //отправлять класс с флагом в кастомный инпут
-
           onClick={() => setIsOpen(!isOpen)}
         />
       )}

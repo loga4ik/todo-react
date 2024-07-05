@@ -3,9 +3,12 @@ import React, {
   ChangeEventHandler,
   MouseEventHandler,
   ReactNode,
+  memo,
+  useContext,
 } from "react";
 import { useThemeContext } from "../../Hooks/useThemeContext";
 import { Control } from "react-hook-form";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 type props = {
   inputType: "btn" | "text" | "password";
@@ -34,7 +37,7 @@ export const Input: React.FC<props> = ({
   register,
   children,
 }) => {
-  const { theme } = useThemeContext();
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       {inputType === "btn" ? (

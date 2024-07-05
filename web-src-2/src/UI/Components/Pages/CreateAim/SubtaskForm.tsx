@@ -1,8 +1,13 @@
-import React from "react";
-import { Control, FieldArrayWithId, useFieldArray } from "react-hook-form";
+import React, { useContext } from "react";
+import {
+  Control,
+  Controller,
+  FieldArrayWithId,
+  useFieldArray,
+} from "react-hook-form";
 import { InputAimType } from "../../../../Types/AimListTypes";
-import { useThemeContext } from "../../../../Hooks/useThemeContext";
-import { Input } from "../../../UIKit/Input";
+import { Button } from "../../../UIKit/Inputs/Button";
+import Input from "../../../UIKit/Inputs/Input";
 
 type Props = {
   control: Control<InputAimType>;
@@ -17,43 +22,35 @@ export const SubtaskForm: React.FC<Props> = ({ control, task, task_id }) => {
     remove: subtasksRemove,
   } = useFieldArray({
     control,
-    name: `tasks.${task_id}.subtasks`, //"tasks.0.subtasks",
+    name: `tasks.${task_id}.subtasks`,
   });
-  const { theme } = useThemeContext();
 
   return (
     <>
       {subtakFields.map((subtask, subtask_id) => (
         <div key={`subtask${subtask_id}`} className="form_subtask">
-          <Input
-            inputType="text"
-            placeholder="подзача"
-            className="subtask_input"
-            {...control.register(
-              `tasks.${task_id}.subtasks.${subtask_id}.text`,
-              {
-                required: "обязательное поле",
-                pattern: {
-                  value: /^[a-zа-яё\s]+$/iu,
-                  message: "This input is rus only.",
-                },
-              }
+          <Controller
+            name={`tasks.${task_id}.subtasks.${subtask_id}.text`}
+            control={control}
+            render={({ field }) => (
+              <Input
+                className={"subtask_input"}
+                inputType="text"
+                placeholder="подзача"
+                {...field}
+              />
             )}
           />
-          <Input
-            className={`aimFormDelete ${
-              theme ? "dark_out_small text_dark" : "light_out_small"
-            }`}
-            inputType="btn"
+          <Button
+            className="aimFormDelete"
+            type="button"
             onClick={() => subtasksRemove(subtask_id)}
           />
         </div>
       ))}
-      <Input
-        className={`aimFormAdd ${
-          theme ? "dark_out_small text_dark" : "light_out_small"
-        }`}
-        inputType="btn"
+      <Button
+        className="aimFormAdd"
+        type="button"
         onClick={() => subtasksAppend({ text: "" })}
       />
     </>
