@@ -16,6 +16,7 @@ Router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 Router.get("/getAllUsers", async (req, res) => {
   try {
     const data = await user.findAll();

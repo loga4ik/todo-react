@@ -4,7 +4,6 @@ import { AimType } from "../../../../../Types/AimListTypes";
 import { AppDispatch, RootState } from "../../../../../store";
 import { userTasksAndSubtasks } from "../../../../../Slices/todoSlice/todoSlice";
 import { TaskList } from "../Tasks/TaskList";
-import { useThemeContext } from "../../../../../Hooks/useThemeContext";
 import { ThemeContext } from "../../../../../Context/ThemeContext";
 
 type Props = {

@@ -8,7 +8,6 @@ import { setAllUserDefault } from "../../../Slices/userSlice/userSlice";
 import { useThemeContext } from "../../../Hooks/useThemeContext";
 import { ThemeSwitcher } from "../../UIKit/themeSwicher/ThemeSwitcher";
 import { Input } from "../../UIKit/Input";
-import { useLocalStorage } from "../../../Hooks/useLocalStorage";
 import { ThemeContext } from "../../../Context/ThemeContext";
 
 export const Layout = () => {

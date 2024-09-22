@@ -24,7 +24,6 @@ type Props = {
 export const TodoList: React.FC<Props> = ({ currentUser }) => {
   const todoList = useSelector((state: RootState) => state.todo.todoList);
   const dispatch = useDispatch<AppDispatch>();
-  // const [text, setText] = useState<string>("");
 
   const comlitedTodo = todoList.filter((todo) => !todo.is_active);
   const newTodo = todoList.filter((todo) => todo.is_active);
